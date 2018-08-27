@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.yc.market.dao.DetailDao">
+	<select id="selectDetail" resultMap="DetailMap">
+	  	select * from detail where orderid=#{orderid}
+	 </select>
+	  
+	  <resultMap type="com.yc.market.bean.Detail" id="DetailMap">
+  		<id column="did" property="did"></id>
+  		<association property="goods" column="gid"
+ 		 	select="com.yc.market.dao.DetailDao.selectGoods">
+ 		</association>
+  	</resultMap>
+  	
+  	<select id="selectGoods" resultType="com.yc.market.bean.Goods">
+	  	select * from Goods where gid=#{gid}
+	 </select>
+  	
+  	
+	
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.market.dao.TypeDao">
+  
+  <select id="selectType2" resultType="com.yc.market.bean.Type">
+  	select a.* from type a where a.parentid = 
+	(select b.typeid from type b where a.parentid = b.typeid and b.typeid=#{typeid})
+  </select>
+  
+  <select id="selectType3" resultType="com.yc.market.bean.Type">
+  	select c.* from type c where c.parentid = 
+  	(select a.typeid from type a where a.parentid = 
+	(select b.typeid from type b where a.parentid = b.typeid and b.typeid=#{typeid1})
+	and a.typeid=#{typeid2})
+  </select>
+    
+</mapper>

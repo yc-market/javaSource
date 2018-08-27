@@ -1,7 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<script type="text/javascript">
+		
+		function rpay(){
+			var r=confirm('是否确定购买?');
+			if(r==true){
+				
+				location.href='payment.do';
+			}
+		}
+</script>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link type="text/css" rel="stylesheet" href="css/style.css" />
@@ -66,38 +75,48 @@
         </div>
 		<div class="m_right">
             <p></p>		
-            
+            <form action="payment.do" >
+        	<input type="hidden" name="op" value="Payment" />
 			<table border="0" class="ma_tab" style="width:930px; margin-top:50px;" cellspacing="0" cellpadding="0">
+			  <tr>
+                <td align="right" width="130" style="padding-right:30px;">订单号</td>                                                                       
+                <td><input type="text" value="${param.orderid}" name="gid" readonly="readonly" /></td>
+              </tr>
               <tr>
-                <td align="right" width="130" style="padding-right:30px;">您的充值金额为</td>                                                                       
-                <td>￥ 999.00</td>
+                <td align="right" width="130" style="padding-right:30px;">您需支付的金额为</td>                                                                       
+                <td><input type="text" value="${param.buymoney}" name="buymoney" readonly="readonly" /></td>
               </tr>
               <tr>
                 <td align="right" style="padding-right:30px;">您选择的支付方式为</td>
-                <td>支付宝</td>
+                <td><input id="r1" type="radio" value="1" name="account">支付宝</input>
+					<input id="r2" type="radio" value="2" name="account">微信</input>
+					<input id="r3" type="radio" value="3" name="account">账户余额</input></td>
               </tr>
               <tr>
                 <td align="right" style="padding-right:30px;">支付手续费用为</td>
                 <td>￥ 0.00</td>
               </tr>
-              <tr valign="top">
-                <td align="right" style="padding-right:30px;">支付方式描述</td>
-                <td>
-                	支付宝网站(www.alipay.com) 是国内先进的网上支付平台。<br />
-                    支付宝收款接口：在线即可开通，<font color="#ff4e00">零预付，免年费，</font>单笔阶梯费率，无流量限制。<br />
-                    <a href="#" style="color:#ff4e00;">立即在线申请</a>
-                </td>
-              </tr>
 			</table>
             
             <p align="center">
-            	<input type="submit" value="立即使用支付宝支付" class="btn_tj" />
+            	<input type="submit" value="立即支付" class="btn_tj" />
             </p>
 			
-
-
-            
+			</form>
+			<c:if test="${not empty msg}">
+				<script>
+				alert("${msg}");
+				</script>
+			</c:if>
         </div>
     </div>
+    
 	<!--End 用户中心 End--> 
 <%@ include file="Footer.jsp" %>
+	</div>
+	
+</body>
+
+
+
+

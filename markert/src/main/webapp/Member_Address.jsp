@@ -3,6 +3,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<style type="text/css">
+.add_b1{
+	background:url("images/z_add.png");width:120px;height:35px;border:0px;margin-right:20px 
+}
+</style>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link type="text/css" rel="stylesheet" href="css/style.css" />
     <!--[if IE 6]>
@@ -14,13 +19,25 @@
         
     <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" src="js/menu.js"></script>    
-        
+        <script type="text/javascript" src="js/jsAddress.js"></script>
 	<script type="text/javascript" src="js/select.js"></script>
-        
+    <script type="text/javascript">
+    function rdelete(addrid){
+		var r=confirm('是否确定删除?');
+		if(r==true){
+			location.href='address.do?op=delete&addrid='+addrid;
+		}
+	}
+    
+    
+    </script>   
+  	      
     
 <title>尤洪</title>
 </head>
 <body>  
+
+
 <%@ include file="header.jsp"%>
 <div class="i_bg bg_color">
     <!--Begin 用户中心 Begin -->
@@ -31,114 +48,99 @@
             <div class="mem_tit">收货地址</div>
 			<div class="address">
             	<div class="a_close"><a href="#"><img src="images/a_close.png" /></a></div>
+            	
             	<table border="0" class="add_t" align="center" style="width:98%; margin:10px auto;" cellspacing="0" cellpadding="0">
+                  
+                  <c:forEach items="${list}" var="address">
                   <tr>
-                    <td colspan="2" style="font-size:14px; color:#ff4e00;">杨杨公司</td>
+                    <td><a href="address.do?op=SelectAddressByAddrId&addrid=${address.addrid}">地址${address.addrid}</a></td>
+                  
+                  <td><A href="javascript:rdelete(${address.addrid})">[删除]</A></td>
+                
                   </tr>
-                  <tr>
-                    <td align="right" width="80">收货人姓名：</td>
-                    <td>杨杨</td>
-                  </tr>
-                  <tr>
-                    <td align="right">配送区域：</td>
-                    <td>四川成都市武侯区三环以内</td>
-                  </tr>
-                  <tr>
-                    <td align="right">详细地址：</td>
-                    <td>科华北路66号世外桃源写字楼3楼</td>
-                  </tr>
-                  <tr>
-                    <td align="right">手机：</td>
-                    <td>12345678998</td>
-                  </tr>
-                  <tr>
-                    <td align="right">电话：</td>
-                    <td>028-12345678</td>
-                  </tr>
-                  <tr>
-                    <td align="right">电子邮箱：</td>
-                    <td>123456789@qq.com</td>
-                  </tr>
-                  <tr>
-                    <td align="right">标志建筑：</td>
-                    <td>世外桃源</td>
-                  </tr>
+                  </c:forEach>
                 </table>
 				
-                <p align="right">
-                	<a href="#" style="color:#ff4e00;">设为默认</a>&nbsp; &nbsp; &nbsp; &nbsp; <a href="#" style="color:#ff4e00;">编辑</a>&nbsp; &nbsp; &nbsp; &nbsp; 
-                </p>
-
+                
             </div>
 
             <div class="mem_tit">
             	<a href="#"><img src="images/add_ad.gif" /></a>
             </div>
+            </body>
+            <form action="address.do">
+            <input type="hidden" name="op" value="add"/>
             <table border="0" class="add_tab" style="width:930px;"  cellspacing="0" cellpadding="0">
               <tr>
                 <td width="135" align="right">配送地区</td>
                 <td colspan="3" style="font-family:'宋体';">
-                	<select class="jj" name="country" style="background-color:#f6f6f6;">
-                      <option value="0" selected="selected">请选择...</option>
-                      <option value="1">中国</option>
-                      <option value="2">中国</option>
-                      <option value="3">中国</option>
-                      <option value="4">中国</option>
-                    </select>
-                	<select class="jj" name="province">
-                      <option value="0" selected="selected">请选择...</option>
-                      <option value="1">四川</option>
-                      <option value="2">重庆</option>
-                      <option value="3">北京</option>
-                      <option value="4">云南</option>
-                    </select>
-                    <select class="jj" name="city">
-                      <option value="0" selected="selected">请选择...</option>
-                      <option value="1">成都</option>
-                      <option value="2">宜宾</option>
-                      <option value="3">南充</option>
-                      <option value="4">绵阳</option>
-                    </select>
-                    <select class="jj" name="area">
-                      <option value="0" selected="selected">请选择...</option>
-                      <option value="1">武侯区</option>
-                      <option value="2">成华区</option>
-                      <option value="3">锦江区</option>
-                      <option value="4">青羊区</option>
-                    </select>
+                	<select id="cmbProvince" name="cmbProvince"></select>
+						<select id="cmbCity" name="cmbCity"></select>
+						<select id="cmbArea" name="cmbArea"></select>
+ 
+ 
+			   <script type="text/javascript">
+					addressInit('cmbProvince', 'cmbCity', 'cmbArea');
+			   </script>
+
+                	
                     （必填）
                 </td>
               </tr>
               <tr>
                 <td align="right">收货人姓名</td>
-                <td style="font-family:'宋体';"><input type="text" value="姓名" class="add_ipt" />（必填）</td>
+                <td style="font-family:'宋体';"><input type="text"   name="receiver" class="add_ipt" />（必填）</td>
                 <td align="right">电子邮箱</td>
-                <td style="font-family:'宋体';"><input type="text" value="12345678@qq.com" class="add_ipt" />（必填）</td>
+                <td style="font-family:'宋体';"><input type="text" name="email" class="add_ipt" />（必填）</td>
               </tr>
               <tr>
                 <td align="right">详细地址</td>
-                <td style="font-family:'宋体';"><input type="text" value="世外桃源" class="add_ipt" />（必填）</td>
+                <td style="font-family:'宋体';"><input type="text" name="area" class="add_ipt" />（必填）</td>
                 <td align="right">邮政编码</td>
-                <td style="font-family:'宋体';"><input type="text" value="610000" class="add_ipt" /></td>
+                <td style="font-family:'宋体';"><input type="text" name="emailid" class="add_ipt" /></td>
               </tr>
               <tr>
                 <td align="right">手机</td>
-                <td style="font-family:'宋体';"><input type="text" value="1361234587" class="add_ipt" />（必填）</td>
+                <td style="font-family:'宋体';"><input type="text" name="phone" class="add_ipt" />（必填）</td>
                 <td align="right">电话</td>
-                <td style="font-family:'宋体';"><input type="text" value="028-12345678" class="add_ipt" /></td>
+                <td style="font-family:'宋体';"><input type="text" name="tel" class="add_ipt" /></td>
               </tr>
               <tr>
                 <td align="right">标志建筑</td>
-                <td style="font-family:'宋体';"><input type="text" value="世外桃源大酒店" class="add_ipt" /></td>
-                <td align="right">最佳送货时间</td>
-                <td style="font-family:'宋体';"><input type="text" value="" class="add_ipt" /></td>
+                <td style="font-family:'宋体';"><input type="text" name="building" class="add_ipt" /></td>
+                
               </tr>
             </table>
+            
            	<p align="right">
-            	<a href="#">删除</a>&nbsp; &nbsp; <a href="#" class="add_b">确认修改</a>
+           	
+           	<td><input type="submit" value="" class="add_b1" sylte="color:#ffffff"/></td>
+          
             </p> 
-           
-
+           </form>
+        <c:if test="${! empty param.msg1}">
+	       <script>
+		        alert("添加成功");
+	       </script>
+	    </c:if>
+	    
+	    <c:if test="${! empty param.error1}">
+	       <script>
+		        alert("添加失败");
+	       </script>
+	    </c:if>
+	    <c:if test="${! empty param.msg}">
+	       <script>
+		        alert("删除成功");
+	       </script>
+	    </c:if>
+	    
+	    <c:if test="${! empty param.error}">
+	       <script>
+		        alert("删除失败");
+	       </script>
+	    </c:if>
+	    
             
         </div>
     </div>

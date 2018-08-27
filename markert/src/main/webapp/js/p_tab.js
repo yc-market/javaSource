@@ -3,7 +3,7 @@
 var jq = jQuery.noConflict();
 
 jQuery(function(){
-//ÓÅÊÆÒ³Ãæµã»÷×Óµ¼º½
+//ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½
 	var subNav_active = jq(".adv_active");
 	var subNav_scroll = function(target){
 		subNav_active.removeClass	("adv_active");
@@ -17,15 +17,25 @@ jQuery(function(){
 		jq("html,body").animate({scrollTop:targetScroll},300);
 		return false;
 	});
-	//Ò³ÃæÌø×ªÊ±¶¨Î»
+	//Ò³ï¿½ï¿½ï¿½ï¿½×ªÊ±ï¿½ï¿½Î»
 	if(window.location.hash){
-		var targetScroll = jq(window.location.hash).offset().top - 80;
+		var targetScroll = (jq(window.location.hash).offset()||{ "top": NaN }).top-80;
+		if (isNaN(top)) {
+//		    alert("something is wrong, no top");
+		} else {
+//		    alert(top);
+		}
 		jq("html,body").animate({scrollTop:targetScroll},300);
 	}
 	jQuery(window).scroll(function(){
 		var jqthis = jq(this);
 		var targetTop = jq(this).scrollTop();
-		var footerTop = jq("#footer").offset().top;
+		var footerTop = (jq("#footer").offset()||{ "top": NaN }).top;
+		if (isNaN(top)) {
+		    
+		} else {
+		    
+		}
 		var height = jq(window).height();
 		
 		if (targetTop >= 520){

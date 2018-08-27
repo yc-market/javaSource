@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link type="text/css" rel="stylesheet" href="css/style.css" />
@@ -16,7 +17,11 @@
     <script type="text/javascript" src="js/menu.js"></script>    
         
 	<script type="text/javascript" src="js/select.js"></script>
-        
+    <style type="text/css">
+    	.ma_a_v a{
+			color:#ff4e00; margin:0 60px;
+		}
+    </style>    
     
 <title>尤洪</title>
 </head>
@@ -51,7 +56,7 @@
                 <ul>
                 	<li><a href="Member_Safe.jsp">账户安全</a></li>
                     <li><a href="Member_Packet.jsp">我的红包</a></li>
-                    <li><a href="Member_Money.jsp" class="now">资金管理</a></li>
+                    <li><a href="payment.do?op=SelectBalance" class="now">资金管理</a></li>
                 </ul>
             </div>
             <div class="left_m">
@@ -67,39 +72,43 @@
 		<div class="m_right">
             <p></p>			
             <div class="mem_tit">
-            	<span class="fr" style="font-size:12px; color:#55555; font-family:'宋体'; margin-top:5px;">共发现0件</span>会员余额
+            	<span class="fr" style="font-size:12px; color:#55555; font-family:'宋体'; margin-top:5px;"></span>账单明细
             </div>
 			<table border="0" class="ma_tab" style="width:930px; text-align:center; margin-bottom:30px;" cellspacing="0" cellpadding="0">
               <tr>
-              	<td class="ma_a" colspan="7" align="right"><a href="Member_Money_Charge.jsp">充值</a>|<a href="#">提现</a>|<a href="#">查看账户明细</a>|<a href="#">查看申请记录</a></td>
+              	<td class="ma_a" colspan="7" align="right"><a href="Member_Money_type.jsp">添加绑定账户</a>|<a href="Member_Money_Charge.jsp?balance=${payment.balance}">充值</a></td>
               </tr>
               <tr>                                                                                                                                                    
                 <td width="155">操作时间</td>                                                                                                                                         
                 <td width="110">类型</td>
                 <td width="110">金额</td>
-                <td width="130">会员备注</td>
-                <td width="155">管理员备注</td>
-                <td width="130">状态</td>
-                <td width="140">操作</td>
               </tr>
+              <c:forEach items="${list }" var="list">
               <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
+                <td>${list.modtime}</td>
+                <td>
+                <c:if test="${list.account=='1' }">支付宝</c:if>
+      			<c:if test="${list.account=='2' }">微信</c:if>
+      			<c:if test="${list.account=='3' }">账户余额</c:if>
+                </td>
+                <td>${list.changes}</td>
               </tr>
+              </c:forEach>
               <tr>
-                <td colspan="7" align="right">您当前的可用资金为：￥0.00</td>
+                <td colspan="7" align="right">您当前的可用资金为：￥${payment.balance}</td>
               </tr>
 			</table>
 			
-
+			<c:if test="${not empty msg}">
+				<script>
+				alert("${msg}");
+				</script>
+			</c:if>
 
             
         </div>
     </div>
 	<!--End 用户中心 End--> 
 <%@ include file="Footer.jsp" %>
+</div>
+</body>

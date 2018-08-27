@@ -31,35 +31,42 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	<!-- spring mvc 文件上传的解析器 -->
-	<bean id="multipartResolver"
+	<!-- <bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="100000" />
-	</bean>
+	</bean> -->
+	<!-- 照片上传的bean -->
+	 <bean id="multipartResolver"  class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >  
+           <!--  最大为100M，单位为字节   -->
+	     <property name="maxUploadSize" value="104857600"></property>      
+	     <property name="defaultEncoding" value="utf-8"></property>     
+	     <property name="maxInMemorySize" value="40960"></property>
+	 </bean>  
 	
 	<!-- ======================以下是 mybatis 集成 spring 的相关配置======================= -->
 	<!-- spring 数据源 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://127.0.0.1/favorite?useUnicode=true&amp;characterEncoding=UTF-8"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1/market?useUnicode=true&amp;characterEncoding=UTF-8"/>
         <property name="username" value="root"/>
         <property name="password" value="a"/>
 	</bean>
 	<!-- mybatis 会话工厂 -->	
-	<!-- <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		引用 spring 数据源
+	 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 引用 spring 数据源 -->
 		<property name="dataSource" ref="dataSource"></property>
-		注册 mybatis 映射文件，纯接口方案可以省略这段配置
-		<property name="mapperLocations" value="classpath:com.yc.demomybatis..*.xml"></property>
-		配置其他 mybatis 框架属性
+		<!-- 注册 mybatis 映射文件，纯接口方案可以省略这段配置 -->
+		<property name="mapperLocations" value="classpath:com.yc.market..*.xml"></property>
+		<!-- 配置其他 mybatis 框架属性 -->
 		<property name="configurationProperties">
 			<props>
 				<prop key="logImpl">LOG4J</prop>
 			</props>
 		</property>
-	</bean> -->
+	</bean> 
 	<!-- mapper 接口扫描bean，正确配置这个 bean 才能获取到 mybatis mapper -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.yc.demomybaits" />
+		<property name="basePackage" value="com.yc.market.dao" />
 	</bean>
 	
 	<!-- ======================以下是 spring 事务管理的相关配置======================= -->

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link type="text/css" rel="stylesheet" href="css/style.css" />
@@ -30,7 +30,7 @@
             <div class="left_m">
             	<div class="left_m_t t_bg1">订单中心</div>
                 <ul>
-                	<li><a href="Member_Order.jsp">我的订单</a></li>
+                	<li><a href="order.do?op=SelectOrder">我的订单</a></li>
                     <li><a href="Member_Address.jsp">收货地址</a></li>
                     <li><a href="#">缺货登记</a></li>
                     <li><a href="#">跟踪订单</a></li>
@@ -51,7 +51,7 @@
                 <ul>
                 	<li><a href="Member_Safe.jsp">账户安全</a></li>
                     <li><a href="Member_Packet.jsp">我的红包</a></li>
-                    <li><a href="Member_Money.jsp">资金管理</a></li>
+                    <li><a href="payment.do?op=SelectBalance">资金管理</a></li>
                 </ul>
             </div>
             <div class="left_m">
@@ -143,5 +143,13 @@
             
         </div>
     </div>
+    <c:if test="${! empty msg}">
+		<script>
+			alert("购买成功");
+		</script>
+	</c:if>
+    
 	<!--End 用户中心 End--> 
    <%@ include file="Footer.jsp" %>
+   </div>
+   </body>

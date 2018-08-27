@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.market.dao.FavoriteDao">
+	<resultMap type="com.yc.market.bean.User" id="userMap">
+  		<id column="uid" property="uid"></id>
+  		
+  		<collection property="favorites" column="uid"
+ 		 	select="com.yc.market.dao.FavoriteDao.selectFavorite">
+ 		</collection>
+  	</resultMap>
+  	
+  	<resultMap type="com.yc.market.bean.Favorite" id="favoriteMap">
+  		<id column="fid" property="fid"></id>		
+  		<association property="goods" column="gid" fetchType="lazy" 
+ 		 	select="com.yc.market.dao.FavoriteDao.selectGoods">
+ 		 </association>
+  	</resultMap>
+  	
+  	<resultMap type="com.yc.market.bean.Goods" id="goodsMap">
+  		<id column="gid" property="gid"></id>
+  		<collection property="image" column="gid"
+ 		 	select="com.yc.market.dao.FavoriteDao.selectImage">
+ 		</collection>
+  	</resultMap>
+  	
+  	<select id="selectImage" resultType="com.yc.market.bean.Image">
+	  	select * from image where gid=#{gid}
+	 </select>
+	 
+	 <select id="selectGoods" resultMap="goodsMap">
+  		select * from goods where gid=#{gid}
+  	</select>
+  	
+  	<select id="selectFavorite" resultMap="favoriteMap">
+  		select * from favorite where uid=#{uid}
+  	</select>
+  	
+  	<select id="selectUser" resultMap="userMap">
+  		select * from user where uid=#{uid}
+  	</select>
+
+
+
+
+
+
+
+  <!-- 	<select id="selectFavorite" >
+	  	SELECT a.*,b.* ,c.* from favorite a
+	left join goods b on a.gid=b.gid
+	left join image c on c.gid=b.gid
+	  	where a.uid=3
+  </select> -->
+  
+
+  
+</mapper>

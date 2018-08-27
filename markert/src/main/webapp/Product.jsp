@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link type="text/css" rel="stylesheet" href="css/style.css" />
@@ -32,12 +33,88 @@
     
     <script type="text/javascript" src="js/shade.js"></script>
     
+    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+	    $(function(){
+	    	$("#test li").click(function(){
+	    		
+	    		$(this).siblings('li').removeClass("checked");
+	    		
+	    		$(this).addClass("checked");
+	        });
+	    });
+	    
+	    $(function(){
+	    	$("#test1 li").click(function(){
+	    		
+	    		$(this).siblings('li').removeClass("tsSelectImg");
+	    		
+	    		$(this).addClass("tsSelectImg");
+	        });
+	    });
+	    
+	    
+    </script>
+    <script type="text/javascript">
+
+function deleteFavorite(gid){
+	$.ajax({
+		type:"post",
+		contentType:"application/json",  
+		url:"deleteFavorite.do?gid="+gid,
+		success:function (data) {			
+			/* var data = eval('('+data+')'); */
+			console.log(data);
+			if(data){
+				ShowDiv('MyDiv2','fade2')
+			}else{
+				
+			}
+		},
+		error:function(data){
+			alert("error");
+		}
+	});
+}
+
+
+function addFavorite(gid){
+	$.ajax({
+		type:"post",
+		contentType:"application/json",  
+		url:"addFavorite.do?gid="+gid,
+		success:function (data) {			
+			/* var data = eval('('+data+')'); */
+			console.log(data);
+			if(data){
+				ShowDiv('MyDiv','fade')
+			}else{
+				
+			}
+		},
+		error:function(data){
+			alert("error");
+		}
+	});
+}
+
+
+</script>
+    <style type="text/css">
+    .d_care_h{
+		height:27px; line-height:27px; overflow:hidden; background:url(images/heart.png) no-repeat left center; float:left; display:inline; margin-left:50px; padding-left:22px;
+	}
+	.d_care_f{
+		height:27px; line-height:27px; overflow:hidden; background:url(images/heart_h.png) no-repeat left center; float:left; display:inline; margin-left:50px; padding-left:22px;
+	}
+    </style>
 <title>尤洪</title>
 </head>
 <body>  
 
 <%@ include file="header.jsp"%>
-<%@ include file="Menu.jsp"%>
+<%@ include file="Menu_none.jsp"%>
 <div class="i_bg">
 	<div class="postion">
     	<span class="fl">全部 > 美妆个护 > 香水 > 迪奥 > 迪奥真我香水</span>
@@ -45,13 +122,14 @@
     <div class="content">
     	                    
         <div id="tsShopContainer">
-            <div id="tsImgS"><a href="images/p_big.jpg" title="Images" class="MagicZoom" id="MagicZoom"><img src="images/p_big.jpg" width="390" height="390" /></a></div>
+            <div id="tsImgS"><a href="upload/rawImages/${i.imgname}" title="Images" class="MagicZoom" id="MagicZoom"><img src="upload/rawImages/${i.imgname}" width="390" height="390" /></a></div>
             <div id="tsPicContainer">
                 <div id="tsImgSArrL" onclick="tsScrollArrLeft()"></div>
                 <div id="tsImgSCon">
-                    <ul>
-                        <li onclick="showPic(0)" rel="MagicZoom" class="tsSelectImg"><img src="images/ps1.jpg" tsImgS="images/ps1.jpg" width="79" height="79" /></li>
-                        <li onclick="showPic(1)" rel="MagicZoom"><img src="images/ps2.jpg" tsImgS="images/ps2.jpg" width="79" height="79" /></li>
+                	<c:forEach items="${image}" var="image">
+                    <ul id="test1">
+                         <li onclick="showPic(0)" rel="MagicZoom" class="tsSelectImg"><img src="images/ps1.jpg" tsImgS="images/ps1.jpg" width="79" height="79" /></li> 
+                        <%-- <li onclick="showPic(${image.imgid})" rel="MagicZoom" class="SelectImg"><img src="upload/rawImages/${image.imgname}" tsImgS="upload/rawImages/${image.imgname}" width="79" height="79" /></li> --%>
                         <li onclick="showPic(2)" rel="MagicZoom"><img src="images/ps3.jpg" tsImgS="images/ps3.jpg" width="79" height="79" /></li>
                         <li onclick="showPic(3)" rel="MagicZoom"><img src="images/ps4.jpg" tsImgS="images/ps4.jpg" width="79" height="79" /></li>
                         <li onclick="showPic(4)" rel="MagicZoom"><img src="images/ps1.jpg" tsImgS="images/ps1.jpg" width="79" height="79" /></li>
@@ -59,37 +137,42 @@
                         <li onclick="showPic(6)" rel="MagicZoom"><img src="images/ps3.jpg" tsImgS="images/ps3.jpg" width="79" height="79" /></li>
                         <li onclick="showPic(7)" rel="MagicZoom"><img src="images/ps4.jpg" tsImgS="images/ps4.jpg" width="79" height="79" /></li>
                     </ul>
+                    </c:forEach>
                 </div>
                 <div id="tsImgSArrR" onclick="tsScrollArrRight()"></div>
             </div>
             <img class="MagicZoomLoading" width="16" height="16" src="images/loading.gif" alt="Loading..." />				
         </div>
         
-        <div class="pro_des">
+        	<div class="pro_des">
         	<div class="des_name">
-            	<p>Dior/迪奥 真我香水EDP 克丽丝汀迪奥 全新 30ml</p>
-                “开业巨惠，北京专柜直供”，不光低价，“真”才靠谱！
+            	<p>${detail.gname}</p>
+                
             </div>
             <div class="des_price">
-            	本店价格：<b>￥589</b><br />
-                消费积分：<span>28R</span>
+            	本店价格：<b>￥${detail.price}</b><br />
+                消费积分：<span>${detail.grade}R</span>
             </div>
+            <c:if test="${! empty size}">
             <div class="des_choice">
             	<span class="fl">型号选择：</span>
-                <ul>
-                	<li class="checked">30ml<div class="ch_img"></div></li>
-                    <li>50ml<div class="ch_img"></div></li>
-                    <li>100ml<div class="ch_img"></div></li>
+                <ul id="test">	                
+	                	<c:forEach items="${size}" var="size">
+	                		<!-- <li class="checked">30ml<div class="ch_img"></div></li> -->
+		                     <li  class="check" name="size">${size.size}<div class="ch_img"></div></li> 
+		                    <%-- <input type="radio" class="ch_img" name="size">${size.size}</input>  --%>
+	                	</c:forEach>	               
                 </ul>
             </div>
-            <div class="des_choice">
+            </c:if>
+           <!--  <div class="des_choice">
             	<span class="fl">颜色选择：</span>
                 <ul>
                 	<li>红色<div class="ch_img"></div></li>
                     <li class="checked">白色<div class="ch_img"></div></li>
                     <li>黑色<div class="ch_img"></div></li>
                 </ul>
-            </div>
+            </div> -->
             <div class="des_share">
             	<div class="d_sh">
                 	分享
@@ -101,7 +184,17 @@
                         <a href="#"><img src="images/sh_5.gif" /></a>
                     </div>
                 </div>
-                <div class="d_care"><a onclick="ShowDiv('MyDiv','fade')">关注商品</a></div>
+                <c:if test="${! empty loginedUser}">
+                	<c:if test="${ empty success}">
+                		<div class="d_care_h"><a onclick="addFavorite(${detail.gid})">关注商品</a></div>
+                	</c:if>
+                	<c:if test="${! empty success}">
+                		<div class="d_care_f"><a onclick="deleteFavorite(${detail.gid})">取消关注</a></div>
+                	</c:if>
+                </c:if>
+                <c:if test="${empty loginedUser}">
+                	<div class="d_care_h"><a onclick="ShowDiv('MyDiv0','fade0')">关注商品</a></div>
+                </c:if>
             </div>
             <div class="des_join">
             	<div class="j_nums">
@@ -109,9 +202,17 @@
                     <input type="button" value="" onclick="addUpdate(jq(this));" class="n_btn_1" />
                     <input type="button" value="" onclick="jianUpdate(jq(this));" class="n_btn_2" />   
                 </div>
+                <c:if test="${! empty loginedUser}">
                 <span class="fl"><a onclick="ShowDiv_1('MyDiv1','fade1')"><img src="images/j_car.png" /></a></span>
+                </c:if>
+                
+                <c:if test="${empty loginedUser}">
+                <span class="fl"><a onclick="ShowDiv('MyDiv0','fade0')"><img src="images/j_car.png" /></a></span>
+                </c:if>
             </div>            
-        </div>    
+        </div>
+        
+            
         
         <div class="s_brand">
         	<div class="s_brand_img"><img src="images/sbrand.jpg" width="188" height="132" /></div>
@@ -214,23 +315,13 @@
                 	
                 	<table border="0" align="center" style="width:100%; font-family:'宋体'; margin:10px auto;" cellspacing="0" cellpadding="0">
                       <tr>
-                        <td>商品名称：迪奥香水</td>
-                        <td>商品编号：1546211</td>
-                        <td>品牌： 迪奥（Dior）</td>
-                        <td>上架时间：2015-09-06 09:19:09 </td>
+                        <td>商品名称：${detail.gname }</td>
+                        <td>商品编号：${detail.gid }</td>
+                        <!-- <td>品牌： 迪奥（Dior）</td>
+                        <td>上架时间：2015-09-06 09:19:09 </td> -->
                       </tr>
-                      <tr>
-                        <td>商品毛重：160.00g</td>
-                        <td>商品产地：法国</td>
-                        <td>香调：果香调香型：淡香水/香露EDT</td>
-                        <td>&nbsp;</td>
-                      </tr>
-                      <tr>
-                        <td>容量：1ml-15ml </td>
-                        <td>类型：女士香水，Q版香水，组合套装</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                      </tr>
+                      
+                      
                     </table>                                               
                                             
                         
@@ -239,31 +330,24 @@
             
             <div class="des_border" id="p_details">
                 <div class="des_t">商品详情</div>
+                
                 <div class="des_con">
                 	<table border="0" align="center" style="width:745px; font-size:14px; font-family:'宋体';" cellspacing="0" cellpadding="0">
                       <tr>
-                        <td width="265"><img src="images/de1.jpg" width="206" height="412" /></td>
+                        <td width="265"><img src="upload/rawImages/${i.imgname}" width="206" height="412" /></td>
                         <td>
-                        	<b>迪奥真我香水(Q版)</b><br />
-                            【商品规格】：5ml<br />
-                            【商品质地】：液体<br />
-                            【商品日期】：与专柜同步更新<br />
-                            【商品产地】：法国<br />
-                            【商品包装】：无外盒 无塑封<br />
-                            【商品香调】：花束花香调<br />
-                            【适用人群】：适合女性（都市白领，性感，有女人味的成熟女性）<br />
+                        	${detail.des}
                         </td>
                       </tr>
                     </table>
-                    
+                    <c:forEach items="${image}" var="image">
                     <p align="center">
-                    <img src="images/de2.jpg" width="746" height="425" /><br /><br />
-                    <img src="images/de3.jpg" width="750" height="417" /><br /><br />
-                    <img src="images/de4.jpg" width="750" height="409" /><br /><br />
-                    <img src="images/de5.jpg" width="750" height="409" />
-					</p>
+                    <img src="upload/rawImages/${image.imgname}" width="746" height="425" /><br /><br />
                     
+					</p>
+                    </c:forEach>
                 </div>
+                
           	</div>  
             
             <div class="des_border" id="p_comment">
@@ -366,19 +450,18 @@
             <div class="notice_t">
                 <span class="fr" style="margin-top:10px; cursor:pointer;" onclick="CloseDiv('MyDiv','fade')"><img src="images/close.gif" /></span>
             </div>
-            <div class="notice_c">
-           		
+            <div class="notice_c">          		
                 <table border="0" align="center" style="margin-top:;" cellspacing="0" cellpadding="0">
                   <tr valign="top">
                     <td width="40"><img src="images/suc.png" /></td>
                     <td>
                     	<span style="color:#3e3e3e; font-size:18px; font-weight:bold;">您已成功收藏该商品</span><br />
-                    	<a href="#">查看我的关注 >></a>
+                    	<!-- <a href="Favorite.do">查看我的关注 >></a> -->
                     </td>
                   </tr>
                   <tr height="50" valign="bottom">
                   	<td>&nbsp;</td>
-                    <td><a href="#" class="b_sure">确定</a></td>
+                    <td><a href="Product.do?gid=${detail.gid}" class="b_sure">确定</a></td>
                   </tr>
                 </table>
                     
@@ -386,8 +469,32 @@
         </div>
     </div>    
     <!--End 弹出层-收藏成功 End-->
-    
-    
+    <!--Begin 弹出层-收藏成功 Begin-->
+    <div id="fade0" class="black_overlay"></div>
+    <div id="MyDiv0" class="white_content">             
+        <div class="white_d">
+            <div class="notice_t">
+                <span class="fr" style="margin-top:10px; cursor:pointer;" onclick="CloseDiv('MyDiv','fade')"><img src="images/close.gif" /></span>
+            </div>
+            <div class="notice_c">          		
+                <table border="0" align="center" style="margin-top:;" cellspacing="0" cellpadding="0">
+                  <tr valign="top">
+                    <td width="40"></td>
+                    <td>
+                    	<span style="color:#3e3e3e; font-size:18px; font-weight:bold;">您尚未登录，请登录</span><br />
+                    	<!-- <a href="Favorite.do">查看我的关注 >></a> -->
+                    </td>
+                  </tr>
+                  <tr height="50" valign="bottom">
+                  	<td>&nbsp;</td>
+                    <td><a href="Login.jsp" class="b_sure">确定</a></td>
+                  </tr>
+                </table>
+                    
+            </div>
+        </div>
+    </div>    
+    <!--End 弹出层-收藏成功 End-->
     <!--Begin 弹出层-加入购物车 Begin-->
     <div id="fade1" class="black_overlay"></div>
     <div id="MyDiv1" class="white_content">             
@@ -402,12 +509,12 @@
                     <td width="40"><img src="images/suc.png" /></td>
                     <td>
                     	<span style="color:#3e3e3e; font-size:18px; font-weight:bold;">宝贝已成功添加到购物车</span><br />
-                    	购物车共有1种宝贝（3件） &nbsp; &nbsp; 合计：1120元
+                    	购物车共有1种宝贝（3件） &nbsp; &nbsp; 合计：${sessionScope.totalMoney}元
                     </td>
                   </tr>
                   <tr height="50" valign="bottom">
                   	<td>&nbsp;</td>
-                    <td><a href="#" class="b_sure">去购物车结算</a><a href="#" class="b_buy">继续购物</a></td>
+                    <td><a href="BuyCar.jsp" class="b_sure">去购物车结算</a><a href="indexAction.do" class="b_buy">继续购物</a></td>
                   </tr>
                 </table>
                     
@@ -415,5 +522,36 @@
         </div>
     </div>    
     <!--End 弹出层-加入购物车 End-->
-    
+     <!--Begin 弹出层-取消收藏 Begin-->
+    <div id="fade2" class="black_overlay"></div>
+    <div id="MyDiv2" class="white_content">             
+        <div class="white_d">
+            <div class="notice_t">
+                <span class="fr" style="margin-top:10px; cursor:pointer;" onclick="CloseDiv('MyDiv','fade')"><img src="images/close.gif" /></span>
+            </div>
+            <div class="notice_c">          		
+                <table border="0" align="center" style="margin-top:;" cellspacing="0" cellpadding="0">
+                  <tr valign="top">
+                    <td width="40"><img src="images/suc.png" /></td>
+                    <td>
+                    	<span style="color:#3e3e3e; font-size:18px; font-weight:bold;">您已成功取消收藏该商品</span><br />
+                    	<!-- <a href="Favorite.do">查看我的关注 >></a> -->
+                    </td>
+                  </tr>
+                  <tr height="50" valign="bottom">
+                  	<td>&nbsp;</td>
+                    <td><a href="Product.do?gid=${detail.gid}" class="b_sure">确定</a></td>
+                  </tr>
+                </table>
+                    
+            </div>
+        </div>
+    </div>    
+    <!--End 弹出层-取消收藏 End-->
+   
+    </div>
+</body>
+
+
 <%@ include file="Footer.jsp" %>
+

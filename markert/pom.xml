@@ -8,6 +8,34 @@
   <build>
     <finalName>markert</finalName>
   </build>
+  <dependencies>
+        <!-- 用于生成图片的缩略图 -->
+  	 <dependency>
+	    <groupId>net.coobird</groupId>
+	    <artifactId>thumbnailator</artifactId>
+	    <version>0.4.8</version>
+	 </dependency>	 
+	 
+	 	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-validator</artifactId>
+		<version>5.2.4.Final</version>
+	</dependency>
+	 
+	 	<!-- javaee包，在jsp文件中使用-->
+	<dependency>
+	    <groupId>javax</groupId>
+	    <artifactId>javaee-api</artifactId>
+	    <version>7.0</version>	    
+	</dependency>
+	
+		<!-- 文件上传的夹包 ，用于文件上传-->
+    <dependency>
+	    <groupId>commons-fileupload</groupId>
+	    <artifactId>commons-fileupload</artifactId>
+	    <version>1.3.1</version>
+	</dependency>
+	</dependencies>
   <parent>
   	<groupId>com.yc</groupId>
   	<artifactId>base-ssm</artifactId>

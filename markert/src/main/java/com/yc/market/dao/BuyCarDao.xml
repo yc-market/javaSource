@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.market.dao.BuyCarDao">
+ 
+
+ 
+  
+  
+  	<resultMap type="com.yc.market.bean.BuyCar" id="buyCarMap">
+  		<id column="carid" property="carid"></id>
+  		
+  		<association property="goods" column="gid" 
+ 		 	select="com.yc.market.dao.BuyCarDao.selectGoods">
+ 		 </association>
+  	</resultMap>
+  	<resultMap type="com.yc.market.bean.Goods" id="goodsMap">
+  		<id column="gid" property="gid"></id>
+  		<collection property="image" column="gid" 
+ 		 	select="com.yc.market.dao.GoodsDao.selectimg">
+ 		</collection>
+ 		
+ 		<collection property="size" column="gid" 
+ 		 	select="com.yc.market.dao.GoodsDao.selectSize">
+ 		</collection>
+  	</resultMap>
+  	
+	 <select id="selectGoods" resultMap="goodsMap">
+  		select * from goods where gid=#{gid}
+  	</select>
+  	
+  	 <select id="selectBuyCar" resultMap="buyCarMap">
+  		select * from shoppingcar where uid=#{uid}
+  	</select>
+  	
+  	<select id="selectByCarid" resultMap="buyCarMap">
+  		select * from shoppingcar where carid=#{carid}
+  	</select>
+  	
+  	
+  	
+  	 
+  	
+  	
+  	
+    
+</mapper>

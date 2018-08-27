@@ -94,8 +94,6 @@
               </tr>
               <tr>
                 <td>账户余额：<span>￥200元</span></td></td>
-                <td>红包个数：<span style="color:#555555;">3个</span></td></td>
-                <td>红包价值：<span>￥50元</span></td></td>
               </tr>
               <tr>
                 <td colspan="3">订单提醒：
