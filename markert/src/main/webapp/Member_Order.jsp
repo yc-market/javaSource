@@ -94,7 +94,7 @@
                 </td>
                 <td>${list.way}</td>
                 <td>
-                 	取消订单/<a href="SelectDetail.do?orderid=${list.orderid}">查看详情</a>
+                 	取消订单/<a href="SelectDetail.do?oid=${list.oid}">查看详情</a>
       			</td>
               </tr>
               </c:forEach>

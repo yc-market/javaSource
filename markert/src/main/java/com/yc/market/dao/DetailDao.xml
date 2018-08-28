@@ -5,7 +5,7 @@
   
 <mapper namespace="com.yc.market.dao.DetailDao">
 	<select id="selectDetail" resultMap="DetailMap">
-	  	select * from detail where orderid=#{orderid}
+	  	select * from detail where oid=#{oid}
 	 </select>
 	  
 	  <resultMap type="com.yc.market.bean.Detail" id="DetailMap">
@@ -13,12 +13,20 @@
   		<association property="goods" column="gid"
  		 	select="com.yc.market.dao.DetailDao.selectGoods">
  		</association>
+ 		<association property="attribute" column="sizeid"
+ 		 	select="com.yc.market.dao.BuyCarDao.selectAttribute">
+ 		</association>
+ 		<association property="order" column="oid"
+ 		 	select="com.yc.market.dao.DetailDao.selectOrder">
+ 		</association>
   	</resultMap>
   	
   	<select id="selectGoods" resultType="com.yc.market.bean.Goods">
 	  	select * from Goods where gid=#{gid}
 	 </select>
-  	
+  	<select id="selectOrder" resultType="com.yc.market.bean.Order">
+  		select * from orders where oid=#{oid}
+  	</select>
   	
 	
 </mapper>

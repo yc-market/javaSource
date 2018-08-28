@@ -72,17 +72,19 @@
               <tr>                                                                                                                                                    
                 <td width="30%">订单号</td>
                 <td width="40%">商品</td>
-                <td width="15%">价格</td>
-                <td width="15%">数量</td>
+                <td width="10%">价格</td>
+                <td width="5%">数量</td>
+                <td width="15%">规格</td>
               </tr>
               
               
               <c:forEach items="${list }" var="list">
               <tr>
-                <td><font color="#ff4e00">${list.orderid}</font></td>
+                <td><font color="#ff4e00">${list.order.orderid}</font></td>
                 <td>${list.goods.gname}</td>
-                <td>${list.goods.price}</td>
+                <td>${list.attribute.price}</td>
                 <td>${list.count}</td>
+                <td>${list.attribute.size}</td>
               </tr>
               </c:forEach>
             </table>            

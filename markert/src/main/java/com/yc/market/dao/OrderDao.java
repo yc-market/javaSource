@@ -3,6 +3,7 @@ package com.yc.market.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
@@ -23,5 +24,6 @@ public interface OrderDao extends BaseDao<Order>{
 	void update(Order t);
 	
 	@Insert("insert into orders (uid,orderid,buydate,buymoney,address,receiver,enter,pay,deliver,way) values(#{uid},#{orderid},#{buydate},#{buymoney},#{address},#{receiver},#{enter},#{pay},#{deliver},#{way})")
+	@Options(useGeneratedKeys=true,keyColumn="oid",keyProperty="oid")
 	void insert(Order t);
 }

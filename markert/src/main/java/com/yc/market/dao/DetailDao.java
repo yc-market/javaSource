@@ -11,10 +11,10 @@ import com.yc.market.bean.Goods;
 
 @Repository
 public interface DetailDao extends BaseDao<Detail>{
-	@Insert("insert into detail (uid,orderid,gid,count) values(#{uid},#{orderid},#{gid},#{count})")
+	@Insert("insert into detail (uid,oid,gid,count,sizeid) values(#{uid},#{oid},#{gid},#{count},#{sizeid})")
 	void insert(Detail t);
 	
-	List<Detail> selectDetail(String orderid);
+	List<Detail> selectDetail(Integer integer);
 	
 	Goods selectGoods(Integer gid);
 }

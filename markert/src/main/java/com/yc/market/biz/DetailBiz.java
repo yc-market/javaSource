@@ -17,8 +17,8 @@ public class DetailBiz {
 	public void addDetail(Detail detail) throws BizException {
 		detatlDao.insert(detail);
 	}
-	public List<Detail> SelectDetail(String orderid) throws BizException {
-		List<Detail> list = detatlDao.selectDetail(orderid);
+	public List<Detail> SelectDetail(Integer integer) throws BizException {
+		List<Detail> list = detatlDao.selectDetail(integer);
 		return list;
 	}
 }

@@ -21,7 +21,7 @@ public class DetailAction {
 	public String selectDetail(Model model,Detail detail){
 		System.out.println("=========================================");
 		try {
-			List<Detail> list = dbiz.SelectDetail(detail.getOrderid());
+			List<Detail> list = dbiz.SelectDetail(detail.getOid());
 			model.addAttribute("list",list);
 			return "Member_Order_Detail";
 		} catch (BizException e) {

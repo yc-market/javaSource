@@ -70,16 +70,18 @@ public class OrderAction {
 			model.addAttribute("order", order);
 			Detail detail = new Detail();
 			detail.setUid(user.getUid());
-			detail.setOrderid(tsStr);
-			List<BuyCar> list = bbiz.ViewShoppingCar(user.getUid());
+			detail.setOid(order.getOid());
+			List<BuyCar> list = bbiz.selectBuyCar(user.getUid());
 			for(int i = 0;i<list.size();i++){
-				detail.setGid(list.get(i).getGid());
+				detail.setGid(list.get(i).getGoods().getGid());
 				detail.setCount(list.get(i).getCount());
+				detail.setSizeid(list.get(i).getAttribute().getSizeid());
 				dbiz.addDetail(detail);
-				bbiz.delete(list.get(i).getGid());
-				session.setAttribute("buyCarList",null);
-				session.setAttribute("totalMoney",null);
+				bbiz.delete(list.get(i).getCarid());
+				
 			}
+			session.setAttribute("buyCarList",null);
+			session.setAttribute("totalMoney",null);
 			return "BuyCar_Three";
 		} catch (BizException e) {
 			// TODO Auto-generated catch block
