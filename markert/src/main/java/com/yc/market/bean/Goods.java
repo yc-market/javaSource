@@ -11,7 +11,7 @@ public class Goods {
 	@Override
 	public String toString() {
 		return "Goods [gid=" + gid + ", gname=" + gname + ", type=" + type + ", grade=" + grade + ", des=" + des
-				+ ", price=" + price + ", storeid=" + storeid + ", size=" + size + ", image=" + image + "]";
+				+ ", price=" + price + ", storeid=" + storeid + ", attribute=" + attribute + ", image=" + image + "]";
 	}
 
 	private Integer gid;   		 //商品ID
@@ -22,8 +22,18 @@ public class Goods {
 	private Double price;		 //商品价格
 	private Integer storeid;		 //商品所属店铺
 	
-	private List<Size> size;	//商品规格  一个商品对应多个规格
+	private List<Attribute> attribute;	//商品规格  一个商品对应多个规格
 	private List<Image> image;	//对应图片集合
+	private Integer isDown ; //商品下架，0=未下架，1==下架
+
+	
+	public Integer getIsDown() {
+		return isDown;
+	}
+
+	public void setIsDown(Integer isDown) {
+		this.isDown = isDown;
+	}
 
 	public Integer getGid() {
 		return gid;
@@ -49,12 +59,13 @@ public class Goods {
 		this.type = type;
 	}
 
-	public List<Size> getSize() {
-		return size;
+
+	public List<Attribute> getAttribute() {
+		return attribute;
 	}
 
-	public void setSize(List<Size> size) {
-		this.size = size;
+	public void setAttribute(List<Attribute> attribute) {
+		this.attribute = attribute;
 	}
 
 	public Integer getGrade() {
@@ -96,5 +107,7 @@ public class Goods {
 	public void setImage(List<Image> image) {
 		this.image = image;
 	}
+
+	
 	
 }

@@ -163,7 +163,7 @@
 								</c:if>
 							</div>
 							<div class="name">
-								<a href="Product.do?gid=${s.gid}">
+								<a href="goods.do?op=showDetail&gid=${s.gid}">
 									<h2>${s.gname}</h2>
 
 								</a>
@@ -175,7 +175,7 @@
 								<a href="#">${s.gname}${s.size}</a>
 							</div> --%>
 							<div class="carbg">
-								<a href="#" class="ss1">删除</a>
+								<a href="goods.do?gid=${s.gid}&op=downGoods" class="ss1">下架</a>
 								&nbsp;&nbsp;&nbsp;&nbsp; <a href="store.do?op=editGoods&gid=${s.gid}" class="j_car1">编辑</a>
 							</div>
 						</li>

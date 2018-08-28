@@ -78,7 +78,7 @@
     </div>
     <div class="i_car">
     
-    	<div class="car_t">购物车 [ <span>${buyCarList.size()}</span> ]</div>
+    	<div class="car_t">购物车 [ <span id="total">${buyCarList.size()}</span> ]</div>
         <div class="car_bg">
         <c:if test="${empty loginedUser }">
        		<!--Begin 购物车未登录 Begin-->
@@ -90,16 +90,16 @@
         
             <!--Begin 购物车已登录 Begin-->
             <c:forEach items="${buyCarList}" var="c">
-            <ul class="cars">
+            <ul class="cars" id="cars">
             	<li>
                 	<div class="img"><a href="#"><img src="upload/rawImages/${c.goods.image[0].imgname}" width="58" height="58" /></a></div>
                     <div class="name"><a href="#">${c.goods.gname }</a></div>
-                    <div class="price"><font color="#ff4e00">${c.goods.price }</font> X${c.count}</div>
+                    <div class="price"><font color="#ff4e00">${c.attribute.price }</font> X${c.count}</div>
                 </li>
                 
             </ul>
             </c:forEach> 
-            <div class="price_sum">共计&nbsp; <font color="#ff4e00">￥</font><span>${sessionScope.totalMoney}</span></div>
+            <div class="price_sum">共计&nbsp; <font color="#ff4e00">￥</font><span id="totalMoney">${sessionScope.totalMoney}</span></div>
             <div class="price_a"><a href="buycar.do?op=ViewShoppingCar">去购物车结算</a></div>
             <!--End 购物车已登录 End-->
          </c:if>

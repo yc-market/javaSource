@@ -75,16 +75,16 @@
             	<div class="c_s_img"><img src="upload/rawImages/${buyCar.goods.image[0].imgname }" width="73" height="73" /></div>
                 ${buyCar.goods.gname }
             </td>
-            <td align="center">${buyCar.goods.size[0].size}</td>
+            <td align="center">${buyCar.attribute.size}</td>
             <td align="center">
-            <input type="hidden" value="${buyCar.goods.size[0].price}" name="price"/>
+            <input type="hidden" value="${buyCar.attribute.price}" name="price"/>
             	<div class="c_num">
                     
                 	<input id="number" type="text" value="${buyCar.count}" name="count" class="car_ipt" />  
                     
                 </div>
             </td>
-            <td align="center" style="color:#ff4e00;" id="xiaoji_${buyCar.goods.gid}">${buyCar.goods.price*buyCar.count}</td>
+            <td align="center" style="color:#ff4e00;" id="xiaoji_${buyCar.goods.gid}">${buyCar.attribute.price*buyCar.count}</td>
             <td align="center">${buyCar.goods.grade }</td>
             
           </tr>

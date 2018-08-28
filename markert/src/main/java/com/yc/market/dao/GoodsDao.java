@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.yc.market.bean.Goods;
 import com.yc.market.bean.Image;
-import com.yc.market.bean.Size;
+import com.yc.market.bean.Attribute;
 
 @Repository
 public interface GoodsDao extends BaseDao<Goods> {
@@ -38,5 +38,5 @@ public interface GoodsDao extends BaseDao<Goods> {
 	@Select("select * from goods")
 	List<Goods> selectAll();
 	
-	List<Size> selectSize(Integer gid);
+	List<Attribute> selectSize(Integer gid);
 }

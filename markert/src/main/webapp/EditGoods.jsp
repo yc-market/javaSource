@@ -57,6 +57,20 @@
 			form.submit();
 		}
 	}
+	function validate1() {
+		var a = document.getElementById("addsize");
+		var b = document.getElementById("addprice");
+		var form = document.getElementById("size");
+		if (a.value == "") {
+			alert("请输入商品规格");
+			return false;
+		} else if(b.value == ""){
+			alert("请输入对应的商品价格");
+			return false;
+		}else {
+		}
+			form.submit();
+    }
 	
 	function returnStore(){
 		
@@ -139,7 +153,7 @@
 			<div
 				style="height: 40px; width: 972px; float: left; text-align: center; margin-top: 10px; color: #ff4e00">
 				<h1>
-					<a href="store.do?op=showStore">${store.storename}</a>
+					<a href="store.do?op=showStore">返回商店</a>
 				</h1>
 			</div>
 
@@ -183,18 +197,26 @@
 						</tr>
 					</table>
 				</form>
-				<form action="goods.do?op=addSize&gid=${param.gid}" method="post">
+				<form id="size"action="goods.do" method="post">
+				<input type="hidden" name="op" value="addSize">
+				<input type="hidden" name="gid" value="${param.gid }">
 					<table border="0"
 						style="width: 420px; font-size: 14px; margin-top: 30px;"
 						cellspacing="0" cellpadding="0">
 						<tr height="50">
 							<td align="right">
 							<font color="#ff4e00">*</font>&nbsp;商品规格 &nbsp;</td>
-							<td><input type="text" name="size" class="l_add"></td>
+							<td><input id="addsize" type="text" name="size" class="l_add" ></td>
+							
 						</tr>
+						<tr height="50">
+							<td align="right">
+						<font color="#ff4e00">*</font>&nbsp;商品价格 &nbsp;</td>
+							<td><input id="addprice" type="text" name="price" class="l_add" ></td>
+					   </tr>
 						<tr height="60">
 							<td width="80">&nbsp;</td>
-							<td><input type="button" value="确定" onclick="validate()"
+							<td><input  type="button" value="确定" onclick="validate1() "
 								class="log_btn" /></td>
 						</tr>
 					</table>

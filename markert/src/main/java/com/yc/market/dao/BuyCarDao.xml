@@ -3,16 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yc.market.dao.BuyCarDao">
- 
-
- 
-  
-  
   	<resultMap type="com.yc.market.bean.BuyCar" id="buyCarMap">
   		<id column="carid" property="carid"></id>
   		
   		<association property="goods" column="gid" 
  		 	select="com.yc.market.dao.BuyCarDao.selectGoods">
+ 		 </association>
+ 		 <association property="attribute" column="sizeid" 
+ 		 	select="com.yc.market.dao.BuyCarDao.selectAttribute">
  		 </association>
   	</resultMap>
   	<resultMap type="com.yc.market.bean.Goods" id="goodsMap">
@@ -20,8 +18,7 @@
   		<collection property="image" column="gid" 
  		 	select="com.yc.market.dao.GoodsDao.selectimg">
  		</collection>
- 		
- 		<collection property="size" column="gid" 
+ 		<collection property="attribute" column="gid" 
  		 	select="com.yc.market.dao.GoodsDao.selectSize">
  		</collection>
   	</resultMap>
@@ -38,11 +35,7 @@
   		select * from shoppingcar where carid=#{carid}
   	</select>
   	
-  	
-  	
-  	 
-  	
-  	
-  	
-    
+  	<select id="selectAttribute" resultType="com.yc.market.bean.Attribute">
+  		select * from attribute where sizeid=#{sizeid}
+  	</select>
 </mapper>

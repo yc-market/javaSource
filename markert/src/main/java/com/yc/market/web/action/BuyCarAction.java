@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -16,10 +17,12 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.yc.market.bean.Address;
+import com.yc.market.bean.Attribute;
 import com.yc.market.bean.BuyCar;
 import com.yc.market.bean.User;
 import com.yc.market.biz.AddressBiz;
 import com.yc.market.biz.BuyCarBiz;
+import com.yc.market.biz.AttributeBiz;
 import com.yc.market.util.ServletUtils;
 
 
@@ -29,7 +32,8 @@ public class BuyCarAction {
 	private BuyCarBiz bcBiz;
 	@Resource
 	private  AddressBiz aBiz;
-	
+	@Resource
+	private AttributeBiz attrBiz;
 	private HttpSession session;
 	@RequestMapping("buycar.do")
 	public String DoGet(String op,Model model,BuyCar buyCar,HttpServletRequest request, PrintWriter out, Address address){
@@ -40,8 +44,6 @@ public class BuyCarAction {
 			JspName=ViewShoppingCar(buyCar, session, model, request);
 		}else if("ViewShoppingCar2".equals(a)){
 			JspName=ViewShoppingCar2(address, buyCar, session, model, request);
-		}else if("addModel".equals(a)){
-			addModel(out, buyCar, session, model, request);
 		}else if("delete".equals(a)){
 			JspName=Delete(buyCar, session, model);
 		}else if("update".equals(a)){
@@ -65,21 +67,30 @@ public class BuyCarAction {
 		return "redirect:buycar.do?op=ViewShoppingCar";
 	}
 
-
-	private void addModel(PrintWriter out,BuyCar buyCar, HttpSession session2, Model model, HttpServletRequest request) {
+	@RequestMapping("ajax_addCart.do")
+	private void addModel(HttpServletResponse response,Attribute attribute,PrintWriter out,BuyCar buyCar, HttpSession session2, Model model, HttpServletRequest request) {
+		this.session=getSession();
 		Timestamp now=new Timestamp(System.currentTimeMillis());
 		buyCar.setBuydate(now);
-		User user=(User) session2.getAttribute("loginedUser");
+		User user=(User) session.getAttribute("loginedUser");
 		buyCar.setUid(user.getUid());
+		 attribute =  attrBiz.SelectPriceBySize(attribute.getSizeid());
+		
+		System.out.println(attribute.toString());
+		buyCar.setGid(attribute.getGid());
+		
+		buyCar.setSizeid(attribute.getSizeid());
 		
 		if(buyCar.getCount()==null){
 			buyCar.setCount(1);
 		}
-		buyCar.setCarid(bcBiz.addModel(buyCar).getCarid());
+		bcBiz.addModel(buyCar);
+		
+		
 		List<BuyCar> buyCar1=bcBiz.selectByCarid(buyCar.getCarid());
 		
 		int count=buyCar1.get(0).getCount();
-		double price=buyCar1.get(0).getGoods().getPrice();
+		double price= attribute.getPrice();
 		String gname=buyCar1.get(0).getGoods().getGname();
 		String imageName=buyCar1.get(0).getGoods().getImage().get(0).getImgname();
 		//修改会话
@@ -88,14 +99,15 @@ public class BuyCarAction {
 		double c=0;
 		for(int i=0;i<list2.size();i++){
 			int a=(int) list2.get(i).getCount();
-			double b=(double) list2.get(i).getGoods().getPrice();
+			double b=(double) list2.get(i).getAttribute().getPrice();
 			c=c+a*b;
 		}
 		session.setAttribute("totalMoney", c);
 		session.setAttribute("total",  list2.size());
 		
+		response.setContentType("text/html; charset=UTF-8");
 		
-		out.print("<ul class='cars'>"+
+		out.print("<ul class='cars' id='cars'>"+
                     "<li>"+
                       "<div class='img'><a href='#'><img src='upload/rawImages/"+imageName+"' width='58' height='58' /></a></div>"+
                         "<div class='name'><a href='#'>"+gname+"</a> </div>"+
@@ -118,10 +130,11 @@ public class BuyCarAction {
 			System.out.println("====="+list);
 			model.addAttribute("list", list);
 			System.out.println("=========================================="+list.get(0).getGoods().toString());
+			
 			double c=0;
 			for(int i=0;i<list.size();i++){
 				int a=(int) list.get(i).getCount();
-				double b=(double) list.get(i).getGoods().getPrice();
+				double b=(double) list.get(i).getAttribute().getPrice();
 				c=c+a*b;
 			}
 			session.setAttribute("totalMoney", c);
@@ -160,7 +173,7 @@ public class BuyCarAction {
 			double c=0;
 			for(int i=0;i<list.size();i++){
 				int a=(int) list.get(i).getCount();
-				double b=(double) list.get(i).getGoods().getPrice();
+				double b=(double) list.get(i).getAttribute().getPrice();
 				c=c+a*b;
 			}
 			int grade = 0;
@@ -193,7 +206,7 @@ public class BuyCarAction {
 			double c=0;
 			for(int i=0;i<list.size();i++){
 				int a=(int) list.get(i).getCount();
-				double b=(double) list.get(i).getGoods().getPrice();
+				double b=(double) list.get(i).getAttribute().getPrice();
 				c=c+a*b;
 				
 			}

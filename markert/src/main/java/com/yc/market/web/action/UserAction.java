@@ -145,7 +145,7 @@ public class UserAction {
 				double c=0;
 				for(int i=0;i<buyCarList.size();i++){
 					int a=(int) buyCarList.get(i).getCount();
-					double b=(double) buyCarList.get(i).getGoods().getPrice();
+					double b=(double) buyCarList.get(i).getAttribute().getPrice();
 					c=c+a*b;
 					
 				}

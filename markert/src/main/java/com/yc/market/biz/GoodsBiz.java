@@ -31,6 +31,20 @@ public class GoodsBiz {
 	public List<Goods> selectgood(){
 		return gdao.selectgood();
 	}
+
+	/**
+	 * 商品下架
+	 * @param goods
+	 * @throws BizException
+	 */
+		public void update(Goods goods) throws BizException {
+			
+			gdao.update(goods);
+			if(gdao.selectById(goods.getGid()).getIsDown() == 0){
+				throw new BizException("商品下架失败");
+			}
+		}
+
 	
 	
 }

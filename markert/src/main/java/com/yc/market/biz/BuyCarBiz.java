@@ -25,9 +25,9 @@ public class BuyCarBiz {
 		byDao.delete(gid);
 	}
 	
-	public BuyCar addModel(BuyCar buyCar) {
+	public void addModel(BuyCar buyCar) {
 		
-		return buyCar =byDao.addModel(buyCar);
+		 byDao.addModel(buyCar);
 	}
 	public List<BuyCar> selectByCarid(Integer carid) {
 		

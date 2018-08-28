@@ -144,7 +144,7 @@
 													</a>
 												</div>
 												<div class="price">
-													<font>￥<span>${g.price}</span></font> &nbsp; ${g.grade}R
+													<font>￥<span>${g.attribute[0].price}</span></font> &nbsp; ${g.grade}R
 												</div>
 											</div>
 										</li>

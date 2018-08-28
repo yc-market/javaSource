@@ -36,14 +36,25 @@
     <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
     <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript">
-	    $(function(){
-	    	$("#test li").click(function(){
-	    		
-	    		$(this).siblings('li').removeClass("checked");
-	    		
-	    		$(this).addClass("checked");
-	        });
-	    });
+    function show(sizeid){
+		
+		//var size = $(this).html();
+		$.getJSON('ajaxPrice.do', {
+			sizeid : sizeid
+		}, function(attribute1) {
+			$("#price").html(attribute1.price);
+			$("#sizeid").val(attribute1.sizeid);
+		});
+
+	}
+    $(function(){
+    	$("#test li").click(function(){
+    		
+    		$(this).siblings('li').removeClass("checked");
+    		
+    		$(this).addClass("checked");
+        });
+    });
 	    
 	    $(function(){
 	    	$("#test1 li").click(function(){
@@ -76,6 +87,20 @@ function deleteFavorite(gid){
 			alert("error");
 		}
 	});
+}
+function addCart(){
+	alert(sizeid);
+	var price=$("#price").val();
+	var count=$("#goodscount").val();
+	var sizeid=$("#sizeid").val();
+	$.post("ajax_addCart.do",{sizeid:sizeid,count:count},function(data){
+		$("#cars").prepend(data);
+		$("#total").text(parseInt($("#total").text())+1);
+		$("#totalMoney").text(parseInt($("#totalMoney").text())+9);
+		
+		
+	});
+	alert("添加成功");
 }
 
 
@@ -113,7 +138,7 @@ function addFavorite(gid){
 </head>
 <body>  
 
-<%@ include file="header.jsp"%>
+<%@ include file="IndexHeader.jsp"%>
 <%@ include file="Menu_none.jsp"%>
 <div class="i_bg">
 	<div class="postion">
@@ -149,22 +174,23 @@ function addFavorite(gid){
             	<p>${detail.gname}</p>
                 
             </div>
-            <div class="des_price">
-            	本店价格：<b>￥${detail.price}</b><br />
-                消费积分：<span>${detail.grade}R</span>
-            </div>
-            <c:if test="${! empty size}">
-            <div class="des_choice">
-            	<span class="fl">型号选择：</span>
-                <ul id="test">	                
-	                	<c:forEach items="${size}" var="size">
-	                		<!-- <li class="checked">30ml<div class="ch_img"></div></li> -->
-		                     <li  class="check" name="size">${size.size}<div class="ch_img"></div></li> 
-		                    <%-- <input type="radio" class="ch_img" name="size">${size.size}</input>  --%>
-	                	</c:forEach>	               
-                </ul>
-            </div>
-            </c:if>
+            	<div class="des_price">
+					本店价格：￥<b id="price">${attribute[0].price}</b><br /> 消费积分：<span>${detail.grade}R</span>
+				</div>
+				<c:if test="${! empty attribute}">
+
+					<div class="des_choice">
+						<span class="fl">型号选择：</span>
+						<ul id="test">
+							<c:forEach items="${attribute}" varStatus="i" var="attribute">
+								<li onclick="show(${attribute.sizeid})" class="check">${attribute.size}<div class="ch_img"></div></li>
+
+							</c:forEach>
+								<%-- <input type="radio" class="ch_img" name="size">${size.size}</input>  --%>
+								<!-- <div class="ch_img"></div> -->
+						</ul>
+					</div>
+				</c:if>
            <!--  <div class="des_choice">
             	<span class="fl">颜色选择：</span>
                 <ul>
@@ -198,12 +224,15 @@ function addFavorite(gid){
             </div>
             <div class="des_join">
             	<div class="j_nums">
-                	<input type="text" value="1" name="" class="n_ipt" />
+            	<input id="sizeid" type="hidden"></input>
+                	<input id="goodscount" type="text" value="1" name="count" class="n_ipt" />
                     <input type="button" value="" onclick="addUpdate(jq(this));" class="n_btn_1" />
                     <input type="button" value="" onclick="jianUpdate(jq(this));" class="n_btn_2" />   
                 </div>
+                <!-- 加入购物车   ShowDiv_1('MyDiv1','fade1')-->
                 <c:if test="${! empty loginedUser}">
-                <span class="fl"><a onclick="ShowDiv_1('MyDiv1','fade1')"><img src="images/j_car.png" /></a></span>
+                
+                <span class="fl"><a onclick="addCart()"><img src="images/j_car.png" /></a></span>
                 </c:if>
                 
                 <c:if test="${empty loginedUser}">

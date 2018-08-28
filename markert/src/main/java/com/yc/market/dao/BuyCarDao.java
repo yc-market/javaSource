@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
-
+import com.yc.market.bean.Attribute;
 import com.yc.market.bean.BuyCar;
 import com.yc.market.bean.Goods;
 @Repository
@@ -21,9 +21,9 @@ public interface BuyCarDao extends BaseDao<BuyCar>{
     @Delete("delete from shoppingcar where gid=#{gid}")
 	void delete(Integer gid);
 
-    @Insert("insert into shoppingcar(gid,uid,count,buydate) values (#{gid},#{uid},#{count},#{buydate}")
+    @Insert("insert into shoppingcar(gid,uid,count,buydate,sizeid) values (#{gid},#{uid},#{count},#{buydate},#{sizeid})")
     @Options(useGeneratedKeys=true,keyColumn="carid",keyProperty="carid")
-	BuyCar addModel(BuyCar buyCar);
+	void addModel(BuyCar buyCar);
 
    // @Select("select c.*,g.*,i.* from shoppingcar c  left join goods g on c.gid=g.gid  left join image i on g.gid=i.gid where carid=#{carid} ")
     List<BuyCar> selectByCarid(Integer carid);
@@ -35,4 +35,6 @@ public interface BuyCarDao extends BaseDao<BuyCar>{
 	List<BuyCar> selectBuyCar(Integer uid);
 	
 	Goods selectGoods();
+	
+	Attribute selectAttribute(Integer sizeid);
 }

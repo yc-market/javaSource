@@ -12,24 +12,17 @@ public class BuyCar {
      private  Integer  gid ;
      private  Integer  uid ;
      private  Integer  count;   //数量
-     
-     private  Integer  grade;   //积分
-     private  Integer  option;  //操作
-     private  String   gname;
-     private  String   size;
-     private  double   price;
+     private  Integer   sizeid;
      private  Timestamp buydate;
      
      private Goods goods;
-     private String imageName;
+     private Attribute attribute;
      
-     
-    
-	public String getImageName() {
-		return imageName;
+	public Attribute getAttribute() {
+		return attribute;
 	}
-	public void setImageName(String imageName) {
-		this.imageName = imageName;
+	public void setAttribute(Attribute attribute) {
+		this.attribute = attribute;
 	}
 	public Goods getGoods() {
 		return goods;
@@ -43,24 +36,14 @@ public class BuyCar {
 	public void setBuydate(Timestamp buydate) {
 		this.buydate = buydate;
 	}
-	public String getGname() {
-		return gname;
+	
+	public Integer getSizeid() {
+		return sizeid;
 	}
-	public void setGname(String gname) {
-		this.gname = gname;
+	public void setSizeid(Integer sizeid) {
+		this.sizeid = sizeid;
 	}
-	public String getSize() {
-		return size;
-	}
-	public void setSize(String size) {
-		this.size = size;
-	}
-	public double getPrice() {
-		return price;
-	}
-	public void setPrice(double price) {
-		this.price = price;
-	}
+	
 	public Integer getCarid() {
 		return carid;
 	}
@@ -85,18 +68,4 @@ public class BuyCar {
 	public void setCount(Integer count) {
 		this.count = count;
 	}
-	public Integer getGrade() {
-		return grade;
-	}
-	public void setGrade(Integer grade) {
-		this.grade = grade;
-	}
-	public Integer getOption() {
-		return option;
-	}
-	public void setOption(Integer option) {
-		this.option = option;
-	}
-     
-     
 }

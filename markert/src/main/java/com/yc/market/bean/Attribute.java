@@ -4,10 +4,20 @@ package com.yc.market.bean;
  * @author user
  *
  */
-public class Size {
+public class Attribute {
 	private Integer sizeid;
 	private Integer gid;
 	private String size;
+	private Double price; 
+	
+	
+	
+	public Double getPrice() {
+		return price;
+	}
+	public void setPrice(Double price) {
+		this.price = price;
+	}
 	public Integer getSizeid() {
 		return sizeid;
 	}
@@ -25,6 +35,10 @@ public class Size {
 	}
 	public void setSize(String size) {
 		this.size = size;
+	}
+	@Override
+	public String toString() {
+		return "Attribute [sizeid=" + sizeid + ", gid=" + gid + ", size=" + size + ", price=" + price + "]";
 	}
 	
 	

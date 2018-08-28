@@ -22,6 +22,9 @@
   		<association property="goods" column="gid" 
  		 	select="com.yc.market.dao.UserDao.selectGoods">
  		 </association>
+ 		 <association property="attribute" column="sizeid" 
+ 		 	select="com.yc.market.dao.BuyCarDao.selectAttribute">
+ 		 </association>
   	</resultMap>
   	
   	<resultMap type="com.yc.market.bean.Goods" id="goodsMap">
@@ -29,7 +32,7 @@
   		<collection property="image" column="gid" 
  		 	select="com.yc.market.dao.GoodsDao.selectimg">
  		</collection>
- 		<collection property="size" column="gid" 
+ 		<collection property="attribute" column="gid" 
  			select="com.yc.market.dao.GoodsDao.selectSize">
  		</collection>
   	</resultMap>

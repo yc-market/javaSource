@@ -66,16 +66,16 @@
             	<div class="c_s_img"><img src="upload/rawImages/${buyCar.goods.image[0].imgname }" width="73" height="73" /></div>
                 ${buyCar.goods.gname }
             </td>
-            <td align="center">${buyCar.goods.size[0].size}</td>
+            <td align="center">${buyCar.attribute.size}</td>
             <td align="center">
-            <input type="hidden" value="${buyCar.goods.price}" name="price"/>
+            <input type="hidden" value="${buyCar.attribute.price}" name="price"/>
             	<div class="c_num">
-                    <input type="button" value="" onclick="jianUpdate1(jq(this),${buyCar.goods.price},${buyCar.goods.gid});" class="car_btn_1" />
+                    <input type="button" value="" onclick="jianUpdate1(jq(this),${buyCar.attribute.price},${buyCar.goods.gid});" class="car_btn_1" />
                 	<input id="number" type="text" value="${buyCar.count}" name="count_${buyCar.carid}" class="car_ipt" />  
-                    <input type="button" value="" onclick="addUpdate1(jq(this),${buyCar.goods.price},${buyCar.goods.gid});" class="car_btn_2" />
+                    <input type="button" value="" onclick="addUpdate1(jq(this),${buyCar.attribute.price},${buyCar.goods.gid});" class="car_btn_2" />
                 </div>
             </td>
-            <td align="center" style="color:#ff4e00;" id="xiaoji_${buyCar.goods.gid}">${buyCar.goods.price*buyCar.count}</td>
+            <td align="center" style="color:#ff4e00;" id="xiaoji_${buyCar.goods.gid}">${buyCar.attribute.price*buyCar.count}</td>
             <td align="center">${buyCar.goods.grade }</td>
             <td align="center"><a href="javascript:rdelete(${buyCar.goods.gid})">删除</a>&nbsp; &nbsp;<a href="#">加入收藏</a></td>
           </tr>
