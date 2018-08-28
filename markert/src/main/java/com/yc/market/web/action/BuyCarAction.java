@@ -95,7 +95,7 @@ public class BuyCarAction {
 		String imageName=buyCar1.get(0).getGoods().getImage().get(0).getImgname();
 		//修改会话
 		List<BuyCar> list2=bcBiz.selectBuyCar(user.getUid());
-		session.setAttribute("car", list2);
+		session.setAttribute("buyCarList", list2);
 		double c=0;
 		for(int i=0;i<list2.size();i++){
 			int a=(int) list2.get(i).getCount();
@@ -129,7 +129,7 @@ public class BuyCarAction {
 			List<BuyCar> list = bcBiz.selectBuyCar(buyCar.getUid());
 			System.out.println("====="+list);
 			model.addAttribute("list", list);
-			System.out.println("=========================================="+list.get(0).getGoods().toString());
+			//System.out.println("=========================================="+list.get(0).getGoods().toString());
 			
 			double c=0;
 			for(int i=0;i<list.size();i++){

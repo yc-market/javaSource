@@ -57,7 +57,7 @@
               </tr>
               <tr>
                 <td>
-                	<a href="Index.jsp">首页</a> &nbsp; &nbsp; <a href="Member.jsp">用户中心</a>
+                	<a href="indexAction.do">首页</a> &nbsp; &nbsp; <a href="Member.jsp">用户中心</a>
                 </td>
               </tr>
             </table>        	

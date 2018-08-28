@@ -88,7 +88,7 @@
           </tr>
           <tr valign="top" height="150">
           	<td colspan="6" align="right">
-            	<a href="Index.jsp"><img src="images/buy1.gif" /></a>&nbsp; &nbsp; 
+            	<a href="indexAction.do"><img src="images/buy1.gif" /></a>&nbsp; &nbsp; 
             	<input  type="image" src="images/buy2.gif" />
             	<!-- <a href="buycar.do?op=ViewShoppingCar2"><img src="images/buy2.gif" /></a> -->
             </td>

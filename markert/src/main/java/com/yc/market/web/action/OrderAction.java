@@ -77,6 +77,8 @@ public class OrderAction {
 				detail.setCount(list.get(i).getCount());
 				dbiz.addDetail(detail);
 				bbiz.delete(list.get(i).getGid());
+				session.setAttribute("buyCarList",null);
+				session.setAttribute("totalMoney",null);
 			}
 			return "BuyCar_Three";
 		} catch (BizException e) {

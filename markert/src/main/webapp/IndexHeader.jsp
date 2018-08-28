@@ -54,7 +54,7 @@
                     	<div class="s_city_t"></div>
                         <div class="ss_list_c">
                         	<ul>
-                            	<li><a href="Index.jsp">首页</a></li>
+                            	<li><a href="indexAction.do">首页</a></li>
                                 <li><a href="#">网站导航</a></li>
                             </ul>
                         </div>

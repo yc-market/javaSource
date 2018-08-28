@@ -89,18 +89,19 @@ function deleteFavorite(gid){
 	});
 }
 function addCart(){
-	alert(sizeid);
+	
 	var price=$("#price").val();
 	var count=$("#goodscount").val();
 	var sizeid=$("#sizeid").val();
 	$.post("ajax_addCart.do",{sizeid:sizeid,count:count},function(data){
 		$("#cars").prepend(data);
 		$("#total").text(parseInt($("#total").text())+1);
-		$("#totalMoney").text(parseInt($("#totalMoney").text())+9);
+		$("#totalMoney").text(parseInt($("#totalMoney").text())+price);
 		
+		ShowDiv_1('MyDiv1','fade1');
 		
 	});
-	alert("添加成功");
+	//alert("添加成功");
 }
 
 
@@ -538,12 +539,12 @@ function addFavorite(gid){
                     <td width="40"><img src="images/suc.png" /></td>
                     <td>
                     	<span style="color:#3e3e3e; font-size:18px; font-weight:bold;">宝贝已成功添加到购物车</span><br />
-                    	购物车共有1种宝贝（3件） &nbsp; &nbsp; 合计：${sessionScope.totalMoney}元
+                    	
                     </td>
                   </tr>
                   <tr height="50" valign="bottom">
                   	<td>&nbsp;</td>
-                    <td><a href="BuyCar.jsp" class="b_sure">去购物车结算</a><a href="indexAction.do" class="b_buy">继续购物</a></td>
+                    <td><a href="buycar.do?op=ViewShoppingCar" class="b_sure">去购物车结算</a><a href="indexAction.do" class="b_buy">继续购物</a></td>
                   </tr>
                 </table>
                     
