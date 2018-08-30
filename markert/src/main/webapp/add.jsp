@@ -44,10 +44,66 @@
 <script type="text/javascript" src="js/bban.js"></script>
 <script type="text/javascript" src="js/hban.js"></script>
 <script type="text/javascript" src="js/tban.js"></script>
-
 <script type="text/javascript" src="js/lrscroll_1.js"></script>
+<script type="text/javascript">
+$(function(){
+	getNextClassify();
+})
+$(function(){
+	getLastClassify();
+})
+function getNextClassify(){
+	var firstid = $("#first").find('option:selected').val();
+	$("#second").empty();
+	var classNext = $("#second");
+	$.ajax({
+		type:"post",
+		contentType:"application/json",  
+		url:"getNextClassfy.do?parentid="+firstid,
+		success:function (data) {			
+			console.log(data);
+			if(data.length!="" && data.length!=null){
+				for(var i = 0;i < data.length ; i++){					
+					classNext.append("<option value="+data[i].typeid+">"+data[i].typename+"</option>");
+				}
+			}else{
+				classNext.append("<option value="+100000+">---无---</option>")
+			}
+		},
+		error:function(data){
+			alert("数据处理异常")
+		}
+	});	
+	$(function(){
+		getLastClassify();
+	})
+}
+function getLastClassify(){
+	var firstid = $("#first").find('option:selected').val();
+	var secondid = $("#second").find('option:selected').val();
+	$("#third").empty();
+	var classLast = $("#third");
+	$.ajax({
+		type:"post",
+		contentType:"application/json",  
+		url:"getLastClassfy.do?firstid="+firstid+"&secondid="+secondid,
+		success:function (data) {			
+			if(data.length!="" && data.length!=null){
+				for(var i = 0;i < data.length ; i++){					
+					classLast.append("<option value="+data[i].typeid+">"+data[i].typename+"</option>");
+				}
+			}else{
+				classLast.append("<option value="+100000+">---无---</option>")
+			}
+		},
+		error:function(data){
+			alert("数据处理异常")
+		}
+	});	
+}
 
 
+</script>
 <title>尤洪</title>
 </head>
 <body>
@@ -125,7 +181,7 @@
 			</div>
 			<div class="reg_c"
 				style="width: 500px; height: 670px; margin-top: 0px">
-				<form action="goods.do" method="post">
+				<form action="goods.do" method="get">
 				<input type="hidden" name="storeid" value="${param.storeid}">
 				<input type="hidden" name="op" value="goodsAdd">
 					<table border="0"
@@ -144,7 +200,21 @@
 						<tr height="50">
 							<td align="right"><font color="#ff4e00">*</font>&nbsp;商品类目
 								&nbsp;</td>
-							<td><input type="text" value="" class="l_add" name="type" /></td>
+							<td>
+												
+								<select class="form-control" name="first" id="first" onchange="getNextClassify()">
+								<c:forEach items="${first}" var="first" varStatus="id">
+									<option value="${first.typeid}" style="width:40px">${first.typename}</option>
+								</c:forEach>
+								</select>																			
+							
+								<select class="form-control" name="second" id="second" onchange="getLastClassify()">								
+								</select>
+								<select class="form-control" name="third" id="third">
+									<option value="other"></option>	 							
+								</select>
+							</td>
+							
 						</tr>
 						<tr height="50">
 							<td align="right"><font color="#ff4e00">*</font>&nbsp;商品价格
@@ -159,19 +229,14 @@
 						<tr height="50">
 							<td align="right"><font color="#ff4e00">*</font>&nbsp;库存数量
 								&nbsp;</td>
-							<td><input type="text" value="" class="l_add" name="number" /></td>
+							<td><input type="text" value="" class="l_add" name="count" /></td>
 						</tr>
 						<tr height="50">
 							<td align="right"><font color="#ff4e00">*</font>&nbsp;商品积分
 								&nbsp;</td>
 							<td><input type="text" value="" class="l_add" name="grade" /></td>
 						</tr>
-						<tr height="50">
-							<td align="right"><font color="#ff4e00">*</font>&nbsp;商品图片
-								&nbsp;</td>
-							<td><input name="imgname" type="file"
-								accept="image/gif, image/jpeg" /></td>
-						</tr>
+						
 						<tr height="50">
 							<td align="right"><font color="#ff4e00">*</font>&nbsp;商品简介
 								&nbsp;</td>

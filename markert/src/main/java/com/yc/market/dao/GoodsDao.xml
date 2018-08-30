@@ -58,5 +58,11 @@
  		 where gid=#{gid}
  	</update>
 	  
-	
+	<select id="selectByName" resultMap="goodsMap">
+	    select * from goods where gname like #{gname}
+	  </select>
+	  
+	 <select id="selectByType" resultMap="goodsMap">
+	 	select * from goods where type like #{type}
+	 </select>
 </mapper>

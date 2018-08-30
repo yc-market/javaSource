@@ -70,8 +70,9 @@
 <div class="top">
     <div class="logo"><a href="Index.jsp"><img src="images/logo.png" /></a></div>
     <div class="search">
-    	<form>
-        	<input type="text" value="" class="s_ipt" />
+    	<form action="goods.do">
+    		<input type="hidden" name="op" value="selectByName">
+        	<input type="text" name="gname" class="s_ipt" />
             <input type="submit" value="搜索" class="s_btn" />
         </form>                      
         <span class="fl"><a href="#">咖啡</a><a href="#">iphone 6S</a><a href="#">新鲜美食</a><a href="#">蛋糕</a><a href="#">日用品</a><a href="#">连衣裙</a></span>

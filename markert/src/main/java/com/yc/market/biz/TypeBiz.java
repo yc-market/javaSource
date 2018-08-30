@@ -32,6 +32,10 @@ public class TypeBiz {
 		return typeDao.selectType3(typeid1, typeid2);
 	}
 	
+	public Type selectType(int typeid){
+		return typeDao.selectType(typeid);
+	}
+	
 	public Map<String,Map<String,List>> getCategoryAndType(){
 		Map<String,Map<String,List>> map = new HashMap<String,Map<String,List>>();
 		//查询一级目录 firstList
@@ -56,4 +60,6 @@ public class TypeBiz {
 		}
 		return map;
 	}
+	
+	
 }

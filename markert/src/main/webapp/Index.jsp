@@ -310,78 +310,20 @@
 			</div>
 			<div class="fresh_mid">
 				<ul>
+					<c:forEach items="${one}" var="one" begin="1" end="6">
 					<li>
 						<div class="name">
-							<a href="#">新鲜美味 进口美食</a>
+							<a href="#">${one.gname }</a>
 						</div>
 						<div class="price">
-							<font>￥<span>198.00</span></font> &nbsp; 26R
+							<font>￥<span>${one.price}</span></font> &nbsp; ${one.grade}R
 						</div>
 						<div class="img">
-							<a href="#"><img src="images/fre_1.jpg" width="185"
+							<a href="#"><img src="upload/rawImages/${one.image[0].imgname}" width="185"
 								height="155" /></a>
 						</div>
 					</li>
-					<li>
-						<div class="name">
-							<a href="#">新鲜美味 进口美食</a>
-						</div>
-						<div class="price">
-							<font>￥<span>198.00</span></font> &nbsp; 26R
-						</div>
-						<div class="img">
-							<a href="#"><img src="images/fre_2.jpg" width="185"
-								height="155" /></a>
-						</div>
-					</li>
-					<li>
-						<div class="name">
-							<a href="#">新鲜美味 进口美食</a>
-						</div>
-						<div class="price">
-							<font>￥<span>198.00</span></font> &nbsp; 26R
-						</div>
-						<div class="img">
-							<a href="#"><img src="images/fre_3.jpg" width="185"
-								height="155" /></a>
-						</div>
-					</li>
-					<li>
-						<div class="name">
-							<a href="#">新鲜美味 进口美食</a>
-						</div>
-						<div class="price">
-							<font>￥<span>198.00</span></font> &nbsp; 26R
-						</div>
-						<div class="img">
-							<a href="#"><img src="images/fre_4.jpg" width="185"
-								height="155" /></a>
-						</div>
-					</li>
-					<li>
-						<div class="name">
-							<a href="#">新鲜美味 进口美食</a>
-						</div>
-						<div class="price">
-							<font>￥<span>198.00</span></font> &nbsp; 26R
-						</div>
-						<div class="img">
-							<a href="#"><img src="images/fre_5.jpg" width="185"
-								height="155" /></a>
-						</div>
-					</li>
-					<li>
-						<div class="name">
-							<a href="#">新鲜美味 进口美食</a>
-						</div>
-						<div class="price">
-							<font>￥<span>198.00</span></font> &nbsp; 26R
-						</div>
-						<div class="img">
-							<a href="#"><img src="images/fre_6.jpg" width="185"
-								height="155" /></a>
-						</div>
-					</li>
+					</c:forEach>
 				</ul>
 			</div>
 			<div class="fresh_right">

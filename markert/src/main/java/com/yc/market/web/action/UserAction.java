@@ -2,6 +2,7 @@ package com.yc.market.web.action;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -24,10 +25,9 @@ import com.yc.market.biz.BuyCarBiz;
 import com.yc.market.biz.GoodsBiz;
 import com.yc.market.biz.PaymentBiz;
 import com.yc.market.biz.StoreBiz;
+import com.yc.market.biz.TypeBiz;
 import com.yc.market.biz.UserBiz;
 import com.yc.market.util.VerifyCodeUtils;
-
-
 
 @Controller
 public class UserAction {
@@ -37,10 +37,10 @@ public class UserAction {
 	private StoreBiz sbiz;
 	@Resource
 	private GoodsBiz gbiz;
-	
 	@Resource
-	private BuyCarBiz bbiz;
-	
+	private TypeBiz typebiz;
+	@Resource
+	private BuyCarBiz bbiz;	
 	@Resource
 	private PaymentBiz pbiz;
 	
@@ -155,6 +155,8 @@ public class UserAction {
 				if(user.getIdentity()==0){
 					List<Goods> goods = gbiz.selectgood();
 					model.addAttribute("goods", goods);
+					Map<String,Map<String,List>> map = typebiz.getCategoryAndType();		
+					session.setAttribute("map", map);
 					return "Index";
 				}else{
 					//
@@ -196,6 +198,7 @@ public class UserAction {
 	//退出
 	private String logout(){
 		session.setAttribute("loginedUser", null);
+		session.setAttribute("buyCarList", null);
 		model.addAttribute("msg", "已退出，感谢您的使用！");
 		return "Login";
 	}

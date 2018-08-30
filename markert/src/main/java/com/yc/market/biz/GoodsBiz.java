@@ -37,14 +37,20 @@ public class GoodsBiz {
 	 * @param goods
 	 * @throws BizException
 	 */
-		public void update(Goods goods) throws BizException {
-			
-			gdao.update(goods);
-			if(gdao.selectById(goods.getGid()).getIsDown() == 0){
-				throw new BizException("商品下架失败");
-			}
+	public void update(Goods goods) throws BizException {
+		
+		gdao.update(goods);
+		if(gdao.selectById(goods.getGid()).getIsDown() == 0){
+			throw new BizException("商品下架失败");
 		}
+	}
 
+	public List<Goods> selectByName(String gname){
+		return gdao.selectByName(gname);
+	}
 	
+	public List<Goods> selectByType(String typeid){
+		return gdao.selectByType(typeid);
+	}
 	
 }

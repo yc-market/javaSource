@@ -28,7 +28,7 @@
 <%@ include file="Menu_none.jsp"%>
 <div class="i_bg">
 	<div class="postion">
-    	<span class="fl">全部 > 美妆个护 > 香水 > </span>
+    	<span class="fl">全部 > ${first.typename} > ${second.typename } > ${third.typename} </span>
     </div>   
     <div class="content mar_20">
     	<div class="l_history">
@@ -69,7 +69,7 @@
             <div class="list_c">
             	
                 <ul class="cate_list">
-                	<c:forEach items="${list}" var="list">
+                	<c:forEach items="${third}" var="list">
                 	<li>
                     	<div class="img"><a href="#"><img src="upload/rawImages/${list.image[0].imgname}" width="210" height="185" /></a></div>
                         <div class="price">
