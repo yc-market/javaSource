@@ -8,24 +8,23 @@ import java.util.List;
  *
  */
 public class Goods {
-	@Override
-	public String toString() {
-		return "Goods [gid=" + gid + ", gname=" + gname + ", type=" + type + ", grade=" + grade + ", des=" + des
-				+ ", price=" + price + ", storeid=" + storeid + ", attribute=" + attribute + ", image=" + image + "]";
-	}
+	
 
 	private Integer gid;   		 //商品ID
-	private String gname;		 //商品名称
-	private String type;		 //商品类型		 
+	private String gname;		 //商品名称			 		 
 	private Integer grade;		 //商品积分
 	private String des;			 //商品简介
 	private Double price;		 //商品价格
-	private Integer storeid;		 //商品所属店铺
+	private Integer storeid;	 //商品所属店铺
+	private Integer count;
+	private String type;		//商品类型
 	
 	private List<Attribute> attribute;	//商品规格  一个商品对应多个规格
 	private List<Image> image;	//对应图片集合
 	private Integer isDown ; //商品下架，0=未下架，1==下架
 
+	
+	
 	
 	public Integer getIsDown() {
 		return isDown;
@@ -50,15 +49,6 @@ public class Goods {
 	public void setGname(String gname) {
 		this.gname = gname;
 	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
 
 	public List<Attribute> getAttribute() {
 		return attribute;
@@ -106,6 +96,29 @@ public class Goods {
 
 	public void setImage(List<Image> image) {
 		this.image = image;
+	}
+
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	@Override
+	public String toString() {
+		return "Goods [gid=" + gid + ", gname=" + gname + ", grade=" + grade + ", des=" + des + ", price=" + price
+				+ ", storeid=" + storeid + ", count=" + count + ", type=" + type + ", attribute=" + attribute
+				+ ", image=" + image + ", isDown=" + isDown + "]";
 	}
 
 	

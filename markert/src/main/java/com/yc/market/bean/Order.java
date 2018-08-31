@@ -9,9 +9,7 @@ public class Order {
 	private Timestamp buydate;
 	private Double buymoney;
 	private String address;
-	private Integer enter;
 	private Integer pay;
-	private Integer deliver;
 	private String way;
 	private String receiver;
 	
@@ -57,35 +55,17 @@ public class Order {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public Integer getEnter() {
-		return enter;
-	}
-	public void setEnter(Integer enter) {
-		this.enter = enter;
-	}
 	public Integer getPay() {
 		return pay;
 	}
 	public void setPay(Integer pay) {
 		this.pay = pay;
 	}
-	public Integer getDeliver() {
-		return deliver;
-	}
-	public void setDeliver(Integer deliver) {
-		this.deliver = deliver;
-	}
 	public String getWay() {
 		return way;
 	}
 	public void setWay(String way) {
 		this.way = way;
-	}
-	@Override
-	public String toString() {
-		return "Order [oid=" + oid + ", uid=" + uid + ", orderid=" + orderid + ", buydate=" + buydate + ", buymoney="
-				+ buymoney + ", address=" + address + ", enter=" + enter + ", pay=" + pay + ", deliver=" + deliver
-				+ ", way=" + way + "]";
 	}
 	
 }

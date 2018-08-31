@@ -29,9 +29,19 @@ public class IndexAction {
     public String index(HttpSession session,Model model){
 		List<Goods> goods = gbiz.selectgood();	
 		Map<String,Map<String,List>> map = typebiz.getCategoryAndType();		
-		//model.addAttribute("map", map);
 		session.setAttribute("map", map);
 		model.addAttribute("goods", goods);
+		
+		//一级类别显示
+		List<Goods> one = gbiz.selectByType("1/%");
+		model.addAttribute("one", one);
+		
+		List<Goods> two = gbiz.selectByType("10/%");
+		model.addAttribute("two", two);
+		
+		List<Goods> three = gbiz.selectByType("5/%");
+		model.addAttribute("three", three);
+		
     	return "Index";
     }
 }

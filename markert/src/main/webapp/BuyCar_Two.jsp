@@ -49,7 +49,7 @@
 </head>
 <body>  
 <%@ include file="header.jsp"%>
-<%@ include file="Menu.jsp"%>
+<%@ include file="Menu_none.jsp"%>
 <div class="i_bg">  
     <div class="content mar_20">
     	<img src="images/img2.jpg" />        

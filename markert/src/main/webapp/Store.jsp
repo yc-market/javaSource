@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link type="text/css" rel="stylesheet" href="css/style.css" />
@@ -113,9 +113,9 @@
 				<div class="left_m">
 					<div class="left_m_t t_bg4">订单中心</div>
 					<ul>
-						<li><a href="Store.jsp">全部订单</a></li>
-						<li><a href="Store.jsp">已发货订单</a></li>
-						<li><a href="Store.jsp">未发货订单</a></li>
+						<li><a href="selectAllDetail.do?storeid=${store.storeid}">全部订单</a></li>
+						<li><a href="selectDeliverDetail.do?storeid=${store.storeid}&deliver=1">已发货订单</a></li>
+						<li><a href="selectDeliverDetail.do?storeid=${store.storeid}&deliver=0">未发货订单</a></li>
 						<li><a href="Store.jsp">缺货登记</a></li>
 					</ul>
 				</div>
@@ -175,8 +175,15 @@
 								<a href="#">${s.gname}${s.size}</a>
 							</div> --%>
 							<div class="carbg">
+								<c:if test="${s.isDown==0}">
 								<a href="goods.do?gid=${s.gid}&op=downGoods" class="ss1">下架</a>
+								</c:if>
+								<c:if test="${s.isDown==1}">
+								<font class="td_b"><span>已下架</span></font>
+								</c:if>
 								&nbsp;&nbsp;&nbsp;&nbsp; <a href="store.do?op=editGoods&gid=${s.gid}" class="j_car1">编辑</a>
+								
+								
 							</div>
 						</li>
 					</c:forEach>

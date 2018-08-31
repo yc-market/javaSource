@@ -20,4 +20,8 @@ public interface TypeDao extends BaseDao<Type> {
 	
 	//三级目录
 	List<Type> selectType3(@Param("typeid1")Integer typeid1,@Param("typeid2")Integer typeid2);
+	
+	//目录所有查询
+	@Select("select * from type where typeid=#{typeid}")
+	Type selectType(Integer typeid);
 }

@@ -31,7 +31,7 @@
 	                                
 	                                    <h2>${second.key}</h2>
 	                                    <c:forEach items="${second.value}" var="third">
-	                                    <a href="#">${third.typename}</a>|
+	                                    <a href="goods.do?op=selectByThird&typeid=${third.typeid}">${third.typename}</a>|
 	                                    </c:forEach>	                                
 									
 	                                </div>

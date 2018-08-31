@@ -14,31 +14,13 @@
  		 	select="com.yc.market.dao.GoodsDao.selectSize">
  		</collection>
   	</resultMap>
-  	<!-- <resultMap type="com.yc.market.bean.Goods" id="goodsMap">
-  		<id column="gid" property="gid"></id>		
-  		<association property="goods" column="gid" fetchType="lazy" 
- 		 	select="com.yc.market.dao.GoodsDao.selectbygid1">
- 		 </association>
-  	</resultMap> -->
-  	
-  	 <!--  <resultMap type="com.yc.market.bean.Goods" id="goodsMap1">
-  		<id column="gid" property="gid"></id>
-  		<collection property="image" column="gid"
- 		 	select="com.yc.market.dao.GoodsDao.selectimg">
- 		</collection>
-  	  </resultMap> -->
-		
 	  	
 	  <select id="selectimg" resultType="com.yc.market.bean.Image">
 	  	select * from image where gid=#{gid}
 	  </select>
 	  
-	  <!-- <select id="selectbygid1" resultType="goodsMap1">
-	    select * from goods where gid=#{gid}
-	  </select> -->
-	  
 	  <select id="selectgood" resultMap="goodsMap">
-	  	select * from goods
+	  	select * from goods where isDown=0 order by gid desc 
 	  </select>
 	  
 	  <select id="selectSize" resultType="com.yc.market.bean.Attribute">
@@ -58,5 +40,15 @@
  		 where gid=#{gid}
  	</update>
 	  
-	
+	<select id="selectByName" resultMap="goodsMap">
+	    select * from goods where gname like #{gname}
+	  </select>
+	  
+	 <select id="selectByType" resultMap="goodsMap">
+	 	select * from goods where type like #{type}
+	 </select>
+	 
+	 <select id="selectById" resultMap="goodsMap">
+	 	select * from goods where gid = #{gid}
+	 </select>
 </mapper>

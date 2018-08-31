@@ -1,5 +1,7 @@
 package com.yc.market.web.action;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,13 +14,17 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.yc.market.bean.Store;
+import com.yc.market.bean.Type;
 import com.yc.market.bean.User;
 import com.yc.market.biz.StoreBiz;
+import com.yc.market.biz.TypeBiz;
 
 @Controller
 public class StoreAction {
 	@Resource
 	StoreBiz sbiz;
+	@Resource
+	TypeBiz tbiz;
 	
 	private Model model;
 	
@@ -59,7 +65,8 @@ public class StoreAction {
 	
 
 	private String addGoods(Store store, HttpServletRequest request, HttpSession session) {
-		
+		List<Type> first = tbiz.selectType1();
+		session.setAttribute("first", first);
 		return "add";
 	}
 

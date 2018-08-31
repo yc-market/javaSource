@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.yc.market.bean.Address;
 import com.yc.market.bean.Attribute;
 import com.yc.market.bean.Store;
+import com.yc.market.bean.Type;
 import com.yc.market.bean.User;
 import com.yc.market.biz.BizException;
 import com.yc.market.biz.FavoriteBiz;
@@ -27,6 +28,7 @@ import com.yc.market.biz.GoodsBiz;
 import com.yc.market.biz.ImageBiz;
 import com.yc.market.biz.AttributeBiz;
 import com.yc.market.biz.StoreBiz;
+import com.yc.market.biz.TypeBiz;
 import com.yc.market.util.ServletUtils;
 
 @Controller
@@ -42,6 +44,8 @@ public class GoodsAction {
 	private ImageBiz ibiz;
 	@Resource
 	private StoreBiz sbiz;
+	@Resource
+	private TypeBiz tbiz;
 	
 	private Model model;
 	
@@ -66,11 +70,41 @@ public class GoodsAction {
 			}else if("downGoods".equals(a)){//下架商品
 				JspName = downGoods(model,goods, request);
 			}else if("showDetail".equals(a)){//后台商品详情
-				JspName = showDetail(model,goods, request);
+				JspName = showDetail(model,goods,request);
+			}else if("selectByName".equals(a)){
+				JspName = selectByName(model,goods);
+			}else if("selectByThird".equals(a)){
+				JspName = selectByThird(model,goods,request);
 			}
 			return JspName;
 		}
 	
+	private String selectByThird(Model model, Goods goods, HttpServletRequest request) {
+		
+			/*int typeid = Integer.valueOf(request.getParameter("typeid"));						
+			Type third = tbiz.selectType(typeid);
+			model.addAttribute("third", third);
+			int thirdparent= third.getParentid();
+			Type second = tbiz.selectType(thirdparent);
+			model.addAttribute("second", second);
+			Type first = tbiz.selectType(second.getParentid());
+			model.addAttribute("first", first);
+			List<Goods> goodsByThird = gbiz.selectByType(typeid);
+			model.addAttribute("third", goodsByThird);
+			return "TypeList";	*/
+		String typeid = request.getParameter("typeid");
+		List<Goods> typeGoods = gbiz.selectByType("%_"+typeid);
+		model.addAttribute("typeGoods", typeGoods); 
+		return "TypeList";
+	}
+
+	private String selectByName(Model model, Goods goods) {
+		goods.setGname("%"+goods.getGname()+"%");
+		List<Goods> list=gbiz.selectByName(goods.getGname());
+		model.addAttribute("list", list);
+		return "CategoryList";
+	}
+
 	private String showDetail(Model model, Goods goods, HttpServletRequest request) {
 		Goods detail = gbiz.selectById(goods.getGid());
 		User u = (User)request.getSession().getAttribute("loginedUser");
@@ -112,6 +146,11 @@ public class GoodsAction {
 
 	//@RequestMapping("goodsAdd.do")
 	public String goodsAdd(Model model,Goods g,HttpServletRequest request){
+		String first = request.getParameter("first");
+		String second = request.getParameter("second");
+		String third = request.getParameter("third");
+		String type = first+"/"+second+"/"+third;
+		g.setType(type);
         g.setStoreid(ServletUtils.getParameter(request, java.lang.Integer.class, "storeid"));
         System.out.println("================="+g.getStoreid());
         gbiz.insert(g);

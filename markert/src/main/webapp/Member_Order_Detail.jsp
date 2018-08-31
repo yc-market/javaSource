@@ -70,19 +70,26 @@
             <div class="mem_tit">订单详情</div>
             <table border="0" class="order_tab" style="width:930px; text-align:center; margin-bottom:30px;" cellspacing="0" cellpadding="0">
               <tr>                                                                                                                                                    
-                <td width="30%">订单号</td>
+                <td width="20%">订单号</td>
                 <td width="40%">商品</td>
-                <td width="15%">价格</td>
-                <td width="15%">数量</td>
+                <td width="10%">价格</td>
+                <td width="5%">数量</td>
+                <td width="15%">规格</td>
+                <td width="10%">是否发货</td>
               </tr>
               
               
               <c:forEach items="${list }" var="list">
               <tr>
-                <td><font color="#ff4e00">${list.orderid}</font></td>
+                <td><font color="#ff4e00">${list.order.orderid}</font></td>
                 <td>${list.goods.gname}</td>
-                <td>${list.goods.price}</td>
+                <td>${list.attribute.price}</td>
                 <td>${list.count}</td>
+                <td>${list.attribute.size}</td>
+                <td>
+                <c:if test="${list.deliver=='0' }"><a href="">未发货</a></c:if>
+      			<c:if test="${list.deliver=='1' }"><font color="#ff4e00">已发货</font></c:if>
+                </td>
               </tr>
               </c:forEach>
             </table>            

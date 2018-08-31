@@ -73,9 +73,9 @@
                 <td width="20%">订单号</td>
                 <td width="25%">下单时间</td>
                 <td width="10%">订单总金额</td>
-                <td width="25%">订单状态</td>
+                <td width="10%">订单状态</td>
                 <td width="10%">配送方式</td>
-                <td width="10%">操作</td>
+                <td width="25%">操作</td>
               </tr>
               
               
@@ -85,16 +85,12 @@
                 <td>${list.buydate}</td>
                 <td>${list.buymoney}</td>
                 <td>
-                <c:if test="${list.enter=='0' }">未确认，</c:if>
-      			<c:if test="${list.enter=='1' }"><font color="#ff4e00">已确认，</font></c:if>
-                <c:if test="${list.pay=='0' }"><a href="Member_Money_Pay.jsp?uid=${loginedUser.uid}&buymoney=${list.buymoney}&orderid=${list.orderid}">未付款，</a></c:if>
-      			<c:if test="${list.pay=='1' }"><font color="#ff4e00">已付款，</font></c:if>
-      			<c:if test="${list.deliver=='0' }">未发货</c:if>
-      			<c:if test="${list.deliver=='1' }"><font color="#ff4e00">已发货</font></c:if>
+                <c:if test="${list.pay=='0' }"><a href="Member_Money_Pay.jsp?uid=${loginedUser.uid}&buymoney=${list.buymoney}&orderid=${list.orderid}">未付款</a></c:if>
+      			<c:if test="${list.pay=='1' }"><font color="#ff4e00">已付款</font></c:if>
                 </td>
                 <td>${list.way}</td>
                 <td>
-                 	取消订单/<a href="SelectDetail.do?orderid=${list.orderid}">查看详情</a>
+                 	取消订单/<a href="SelectDetail.do?oid=${list.oid}">查看详情</a>
       			</td>
               </tr>
               </c:forEach>

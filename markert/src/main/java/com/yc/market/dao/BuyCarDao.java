@@ -18,8 +18,8 @@ public interface BuyCarDao extends BaseDao<BuyCar>{
 	List<BuyCar> ViewShoppingCar(Integer uid);
 
     
-    @Delete("delete from shoppingcar where gid=#{gid}")
-	void delete(Integer gid);
+    @Delete("delete from shoppingcar where carid=#{carid}")
+	void delete(Integer sizeid);
 
     @Insert("insert into shoppingcar(gid,uid,count,buydate,sizeid) values (#{gid},#{uid},#{count},#{buydate},#{sizeid})")
     @Options(useGeneratedKeys=true,keyColumn="carid",keyProperty="carid")

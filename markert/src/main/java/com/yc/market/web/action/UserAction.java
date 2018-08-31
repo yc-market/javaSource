@@ -2,6 +2,7 @@ package com.yc.market.web.action;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -24,10 +25,10 @@ import com.yc.market.biz.BuyCarBiz;
 import com.yc.market.biz.GoodsBiz;
 import com.yc.market.biz.PaymentBiz;
 import com.yc.market.biz.StoreBiz;
+import com.yc.market.biz.TypeBiz;
 import com.yc.market.biz.UserBiz;
+import com.yc.market.util.Encrypt;
 import com.yc.market.util.VerifyCodeUtils;
-
-
 
 @Controller
 public class UserAction {
@@ -37,19 +38,19 @@ public class UserAction {
 	private StoreBiz sbiz;
 	@Resource
 	private GoodsBiz gbiz;
-	
 	@Resource
-	private BuyCarBiz bbiz;
-	
+	private TypeBiz typebiz;
+	@Resource
+	private BuyCarBiz bbiz;	
 	@Resource
 	private PaymentBiz pbiz;
 	
 	private Model model;
-	@Resource
+	
 	private HttpSession session;
 	
 	@RequestMapping("user.do")
-	public String DoGet(String op,Model model,User user,String upass1,String vcode,HttpServletRequest request,Store store){
+	public String DoGet(String op,Model model,User user,HttpSession session, String upass1,String vcode,HttpServletRequest request,Store store){
 		String JspName=null;
 		this.model=model;
 		this.session=getSession();
@@ -76,8 +77,7 @@ public class UserAction {
     		return "AddStore";
     	}else{  
     		store = sbiz.selectStoreByUid(user.getUid());
-    		session.setAttribute("store", store);
-    		
+    		session.setAttribute("store", store);    		
     		//model.addAttribute("store", store);
     		System.out.println("===================="+store.getStoreid());
     		return "Store";
@@ -101,6 +101,7 @@ public class UserAction {
 		// 杈撳嚭鍥剧墖
 		VerifyCodeUtils.outputImage(w, h, response.getOutputStream(),
 				verifyCode);
+		
 	}
 	
 	
@@ -137,7 +138,7 @@ public class UserAction {
     //登录
     public String login(User user,HttpSession session,Model model){
 		try {
-			user=ubiz.login(user.getUname(),user.getUpass() );
+			user=ubiz.login(user.getUname(),Encrypt.md5(user.getUpass()) );
 			List<BuyCar> buyCarList = bbiz.selectBuyCar(user.getUid());
 			session.setAttribute("buyCarList", buyCarList);
 			if(user!=null){
@@ -155,6 +156,17 @@ public class UserAction {
 				if(user.getIdentity()==0){
 					List<Goods> goods = gbiz.selectgood();
 					model.addAttribute("goods", goods);
+					Map<String,Map<String,List>> map = typebiz.getCategoryAndType();		
+					session.setAttribute("map", map);
+					//一级类别显示
+					List<Goods> one = gbiz.selectByType("1/%");
+					model.addAttribute("one", one);
+					
+					List<Goods> two = gbiz.selectByType("10/%");
+					model.addAttribute("two", two);
+					
+					List<Goods> three = gbiz.selectByType("5/%");
+					model.addAttribute("three", three);
 					return "Index";
 				}else{
 					//
@@ -196,6 +208,7 @@ public class UserAction {
 	//退出
 	private String logout(){
 		session.setAttribute("loginedUser", null);
+		session.setAttribute("buyCarList", null);
 		model.addAttribute("msg", "已退出，感谢您的使用！");
 		return "Login";
 	}

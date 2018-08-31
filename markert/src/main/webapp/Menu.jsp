@@ -2,11 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<style>
-#a #b{ 
-	width:989px; height:411px; background-color:#FFF; left:210px; top:0; display:none; 
-}
-</style>
 <!--Begin Menu Begin-->
 <div class="menu_bg">
 	<div class="menu">
@@ -31,7 +26,7 @@
 	                                
 	                                    <h2>${second.key}</h2>
 	                                    <c:forEach items="${second.value}" var="third">
-	                                    <a href="#">${third.typename}</a>|
+	                                    <a href="goods.do?op=selectByThird&typeid=${third.typeid}">${third.typename}</a>|
 	                                    </c:forEach>	                                
 									
 	                                </div>

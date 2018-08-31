@@ -127,7 +127,7 @@
 						<div id="block">
 							<div id="botton-scroll">
 								<ul class="featureUL">
-									<c:forEach items="${goods}" var="g">
+									<c:forEach items="${goods}" var="g" begin="0" end="7">
 										<li class="featureBox">
 											<div class="box">
 												<div class="h_icon">
@@ -310,78 +310,20 @@
 			</div>
 			<div class="fresh_mid">
 				<ul>
+					<c:forEach items="${one}" var="one">
 					<li>
 						<div class="name">
-							<a href="#">新鲜美味 进口美食</a>
+							<a href="Product.do?gid=${one.gid}">${one.gname}</a>
 						</div>
 						<div class="price">
-							<font>￥<span>198.00</span></font> &nbsp; 26R
+							<font>￥<span>${one.attribute[0].price}</span></font> &nbsp; ${one.grade}R
 						</div>
 						<div class="img">
-							<a href="#"><img src="images/fre_1.jpg" width="185"
+							<a href="Product.do?gid=${one.gid}"><img src="upload/rawImages/${one.image[0].imgname}" width="185"
 								height="155" /></a>
 						</div>
 					</li>
-					<li>
-						<div class="name">
-							<a href="#">新鲜美味 进口美食</a>
-						</div>
-						<div class="price">
-							<font>￥<span>198.00</span></font> &nbsp; 26R
-						</div>
-						<div class="img">
-							<a href="#"><img src="images/fre_2.jpg" width="185"
-								height="155" /></a>
-						</div>
-					</li>
-					<li>
-						<div class="name">
-							<a href="#">新鲜美味 进口美食</a>
-						</div>
-						<div class="price">
-							<font>￥<span>198.00</span></font> &nbsp; 26R
-						</div>
-						<div class="img">
-							<a href="#"><img src="images/fre_3.jpg" width="185"
-								height="155" /></a>
-						</div>
-					</li>
-					<li>
-						<div class="name">
-							<a href="#">新鲜美味 进口美食</a>
-						</div>
-						<div class="price">
-							<font>￥<span>198.00</span></font> &nbsp; 26R
-						</div>
-						<div class="img">
-							<a href="#"><img src="images/fre_4.jpg" width="185"
-								height="155" /></a>
-						</div>
-					</li>
-					<li>
-						<div class="name">
-							<a href="#">新鲜美味 进口美食</a>
-						</div>
-						<div class="price">
-							<font>￥<span>198.00</span></font> &nbsp; 26R
-						</div>
-						<div class="img">
-							<a href="#"><img src="images/fre_5.jpg" width="185"
-								height="155" /></a>
-						</div>
-					</li>
-					<li>
-						<div class="name">
-							<a href="#">新鲜美味 进口美食</a>
-						</div>
-						<div class="price">
-							<font>￥<span>198.00</span></font> &nbsp; 26R
-						</div>
-						<div class="img">
-							<a href="#"><img src="images/fre_6.jpg" width="185"
-								height="155" /></a>
-						</div>
-					</li>
+					</c:forEach>
 				</ul>
 			</div>
 			<div class="fresh_right">
@@ -428,78 +370,20 @@
 			</div>
 			<div class="fresh_mid">
 				<ul>
+					<c:forEach items="${two}" var="two">
 					<li>
 						<div class="name">
-							<a href="#">莫斯利安酸奶</a>
+							<a href="Product.do?gid=${two.gid}">${two.gname}</a>
 						</div>
 						<div class="price">
-							<font>￥<span>96.00</span></font> &nbsp; 25R
+							<font>￥<span>${two.attribute[0].price}</span></font> &nbsp; ${two.grade}R
 						</div>
 						<div class="img">
-							<a href="#"><img src="images/food_1.jpg" width="185"
+							<a href="Product.do?gid=${two.gid}"><img src="upload/rawImages/${two.image[0].imgname}" width="185"
 								height="155" /></a>
 						</div>
 					</li>
-					<li>
-						<div class="name">
-							<a href="#">莫斯利安酸奶</a>
-						</div>
-						<div class="price">
-							<font>￥<span>96.00</span></font> &nbsp; 25R
-						</div>
-						<div class="img">
-							<a href="#"><img src="images/food_2.jpg" width="185"
-								height="155" /></a>
-						</div>
-					</li>
-					<li>
-						<div class="name">
-							<a href="#">莫斯利安酸奶</a>
-						</div>
-						<div class="price">
-							<font>￥<span>96.00</span></font> &nbsp; 25R
-						</div>
-						<div class="img">
-							<a href="#"><img src="images/food_3.jpg" width="185"
-								height="155" /></a>
-						</div>
-					</li>
-					<li>
-						<div class="name">
-							<a href="#">莫斯利安酸奶</a>
-						</div>
-						<div class="price">
-							<font>￥<span>96.00</span></font> &nbsp; 25R
-						</div>
-						<div class="img">
-							<a href="#"><img src="images/food_4.jpg" width="185"
-								height="155" /></a>
-						</div>
-					</li>
-					<li>
-						<div class="name">
-							<a href="#">莫斯利安酸奶</a>
-						</div>
-						<div class="price">
-							<font>￥<span>96.00</span></font> &nbsp; 25R
-						</div>
-						<div class="img">
-							<a href="#"><img src="images/food_5.jpg" width="185"
-								height="155" /></a>
-						</div>
-					</li>
-					<li>
-						<div class="name">
-							<a href="#">莫斯利安酸奶</a>
-						</div>
-						<div class="price">
-							<font>￥<span>96.00</span></font> &nbsp; 25R
-						</div>
-						<div class="img">
-							<a href="#"><img src="images/food_6.jpg" width="185"
-								height="155" /></a>
-						</div>
-					</li>
+					</c:forEach>
 				</ul>
 			</div>
 			<div class="fresh_right">
@@ -546,78 +430,20 @@
 			</div>
 			<div class="fresh_mid">
 				<ul>
+					<c:forEach items="${three}" var="three">
 					<li>
 						<div class="name">
-							<a href="#">美宝莲粉饼</a>
+							<a href="#">${three.gname}</a>
 						</div>
 						<div class="price">
-							<font>￥<span>260.00</span></font> &nbsp; 16R
+							<font>￥<span>${three.attribute[0].price}</span></font> &nbsp; ${three.grade}R
 						</div>
 						<div class="img">
-							<a href="#"><img src="images/make_1.jpg" width="185"
+							<a href="#"><img src="upload/rawImages/${three.image[0].imgname}" width="185"
 								height="155" /></a>
 						</div>
 					</li>
-					<li>
-						<div class="name">
-							<a href="#">美宝莲粉饼</a>
-						</div>
-						<div class="price">
-							<font>￥<span>260.00</span></font> &nbsp; 16R
-						</div>
-						<div class="img">
-							<a href="#"><img src="images/make_2.jpg" width="185"
-								height="155" /></a>
-						</div>
-					</li>
-					<li>
-						<div class="name">
-							<a href="#">美宝莲粉饼</a>
-						</div>
-						<div class="price">
-							<font>￥<span>260.00</span></font> &nbsp; 16R
-						</div>
-						<div class="img">
-							<a href="#"><img src="images/make_3.jpg" width="185"
-								height="155" /></a>
-						</div>
-					</li>
-					<li>
-						<div class="name">
-							<a href="#">美宝莲粉饼</a>
-						</div>
-						<div class="price">
-							<font>￥<span>260.00</span></font> &nbsp; 16R
-						</div>
-						<div class="img">
-							<a href="#"><img src="images/make_4.jpg" width="185"
-								height="155" /></a>
-						</div>
-					</li>
-					<li>
-						<div class="name">
-							<a href="#">美宝莲粉饼</a>
-						</div>
-						<div class="price">
-							<font>￥<span>260.00</span></font> &nbsp; 16R
-						</div>
-						<div class="img">
-							<a href="#"><img src="images/make_5.jpg" width="185"
-								height="155" /></a>
-						</div>
-					</li>
-					<li>
-						<div class="name">
-							<a href="#">美宝莲粉饼</a>
-						</div>
-						<div class="price">
-							<font>￥<span>260.00</span></font> &nbsp; 16R
-						</div>
-						<div class="img">
-							<a href="#"><img src="images/make_6.jpg" width="185"
-								height="155" /></a>
-						</div>
-					</li>
+					</c:forEach>
 				</ul>
 			</div>
 			<div class="fresh_right">
