@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <style type="text/css">
 .l_add {
 	width: 267px;
@@ -29,9 +30,14 @@
     <![endif]-->
 <script type="text/javascript" src="js/jquery-1.11.1.min_044d0927.js"></script>
 <script type="text/javascript" src="js/jquery.bxslider_e88acd1b.js"></script>
-
+<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src="js/menu.js"></script>
+<Link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css" />
+<Link rel="stylesheet" type="text/css" href="easyui/themes/icon.css" />
+<script type="text/javascript" src="easyui/jquery.min.js"></script>
+<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
 
 <script type="text/javascript" src="js/select.js"></script>
 
@@ -44,14 +50,13 @@
 <script type="text/javascript" src="js/bban.js"></script>
 <script type="text/javascript" src="js/hban.js"></script>
 <script type="text/javascript" src="js/tban.js"></script>
+<script type="text/javascript" src="js/typejs.js"></script>
 <script type="text/javascript" src="js/lrscroll_1.js"></script>
 <script type="text/javascript">
 $(function(){
 	getNextClassify();
 })
-$(function(){
-	getLastClassify();
-})
+
 function getNextClassify(){
 	var firstid = $("#first").find('option:selected').val();
 	$("#second").empty();
@@ -66,6 +71,9 @@ function getNextClassify(){
 				for(var i = 0;i < data.length ; i++){					
 					classNext.append("<option value="+data[i].typeid+">"+data[i].typename+"</option>");
 				}
+				$(function(){
+					getLastClassify();
+				})
 			}else{
 				classNext.append("<option value="+100000+">---无---</option>")
 			}
@@ -73,11 +81,9 @@ function getNextClassify(){
 		error:function(data){
 			alert("数据处理异常")
 		}
-	});	
-	$(function(){
-		getLastClassify();
-	})
+	});		
 }
+
 function getLastClassify(){
 	var firstid = $("#first").find('option:selected').val();
 	var secondid = $("#second").find('option:selected').val();
@@ -103,6 +109,9 @@ function getLastClassify(){
 }
 
 
+</script>
+<script type="text/javascript">
+	CKEDITOR.replace('des');
 </script>
 <title>尤洪</title>
 </head>
@@ -208,10 +217,9 @@ function getLastClassify(){
 								</c:forEach>
 								</select>																			
 							
-								<select class="form-control" name="second" id="second" onchange="getLastClassify()">								
+								<select class="form-control" name="second" id="second" onchange="getLastClassify()" >								
 								</select>
-								<select class="form-control" name="third" id="third">
-									<option value="other"></option>	 							
+								<select class="form-control" name="third" id="third"> 							
 								</select>
 							</td>
 							

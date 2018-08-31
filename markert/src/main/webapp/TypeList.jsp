@@ -69,11 +69,11 @@
             <div class="list_c">
             	
                 <ul class="cate_list">
-                	<c:forEach items="${third}" var="list">
+                	<c:forEach items="${typeGoods}" var="list">
                 	<li>
-                    	<div class="img"><a href="#"><img src="upload/rawImages/${list.image[0].imgname}" width="210" height="185" /></a></div>
+                    	<div class="img"><a href="Product.do?gid=${list.gid}"><img src="upload/rawImages/${list.image[0].imgname}" width="210" height="185" /></a></div>
                         <div class="price">
-                            <font>￥<span>${list.price}</span></font> &nbsp; ${list.grade}R
+                            <font>￥<span>${list.attribute[0].price}</span></font> &nbsp; ${list.grade}R
                         </div>
                         <div class="name"><a href="#">${list.gname}</a></div>
                         <div class="carbg">

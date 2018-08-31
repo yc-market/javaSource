@@ -33,8 +33,14 @@ public class IndexAction {
 		model.addAttribute("goods", goods);
 		
 		//一级类别显示
-		List<Goods> one = gbiz.selectByType("1_%");
+		List<Goods> one = gbiz.selectByType("1/%");
 		model.addAttribute("one", one);
+		
+		List<Goods> two = gbiz.selectByType("10/%");
+		model.addAttribute("two", two);
+		
+		List<Goods> three = gbiz.selectByType("5/%");
+		model.addAttribute("three", three);
 		
     	return "Index";
     }

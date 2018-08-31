@@ -28,5 +28,36 @@
   		select * from orders where oid=#{oid}
   	</select>
   	
+  	
+	 
+	 <resultMap type="com.yc.market.bean.Detail" id="DetailMap1">
+  		<id column="did" property="did"></id>
+  		<association property="goods" column="gid"
+ 		 	select="com.yc.market.dao.DetailDao.selectGoods">
+ 		</association>
+ 		<association property="attribute" column="sizeid"
+ 		 	select="com.yc.market.dao.BuyCarDao.selectAttribute">
+ 		</association>
+ 		<association  property="order" column="oid"
+ 		 	select="com.yc.market.dao.DetailDao.selectPayOrder">
+ 		</association>
+  	</resultMap>
+  	
+  	<select id="selectAllDetail" resultMap="DetailMap1">
+	  	select * from detail where gid in (
+	  		select gid from goods where storeid=#{storeid}
+	  	) 
+	 </select>
+	 
+	 <!-- 后台查询订单 是否发货-->
+	<select id="selectDeliverDetail" resultMap="DetailMap1">
+	  	select * from detail where gid in (
+	  		select gid from goods where storeid=#{storeid} 
+	  	) and deliver=#{deliver} 
+	 </select>
+  	
+  	<select id="selectPayOrder" resultType="com.yc.market.bean.Order">
+  		select * from orders where oid=#{oid} and pay=1
+  	</select>
 	
 </mapper>

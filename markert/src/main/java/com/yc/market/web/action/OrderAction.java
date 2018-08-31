@@ -57,9 +57,7 @@ public class OrderAction {
 		order.setUid(user.getUid());
 		order.setBuydate(ts);
 		order.setAddress(address);
-		order.setEnter(0);
 		order.setPay(0);
-		order.setDeliver(0);
 		order.setReceiver(receiver);
 		DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String tsStr = sdf.format(ts); 

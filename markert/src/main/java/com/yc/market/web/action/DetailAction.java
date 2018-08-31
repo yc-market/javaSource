@@ -19,7 +19,6 @@ public class DetailAction {
 	
 	@RequestMapping("SelectDetail.do")
 	public String selectDetail(Model model,Detail detail){
-		System.out.println("=========================================");
 		try {
 			List<Detail> list = dbiz.SelectDetail(detail.getOid());
 			model.addAttribute("list",list);
@@ -29,6 +28,48 @@ public class DetailAction {
 			e.printStackTrace();
 			model.addAttribute("msg", "商品不存在");
 			return "Member_Order";
+		}
+	}
+	@RequestMapping("selectAllDetail.do")
+	public String selectAllDetail(Model model,Integer storeid){
+		try {
+			List<Detail> list = dbiz.selectAllDetail(storeid);
+			model.addAttribute("list",list);
+			return "Store_order";
+		} catch (BizException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			model.addAttribute("msg", "商品不存在");
+			return "Store_order";
+			
+		}
+	}
+	@RequestMapping("selectDeliverDetail.do")
+	public String selectDeliverDetail(Model model,Integer storeid,Integer deliver){
+		try {
+			List<Detail> list = dbiz.selectDeliverDetail(storeid,deliver);
+			model.addAttribute("list",list);
+			return "Store_order_deliver";
+		} catch (BizException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			model.addAttribute("msg", "商品不存在");
+			return "Store_order_deliver";
+			
+		}
+	}
+	@RequestMapping("UpdateDeliverDetail.do")
+	public String UpdateDeliverDetail(Model model,Detail detail,Integer storeid,Integer deliver){
+		try {
+			detail.setDeliver(1);
+			dbiz.update(detail);
+			model.addAttribute("msg", "发货成功");
+			return "redirect:/selectAllDetail.do?storeid=" + storeid;
+		} catch (BizException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			model.addAttribute("msg", "发货失败");
+			return "redirect:/selectDeliverDetail.do?storeid="+ storeid+"&deliver="+ deliver;
 		}
 	}
 }

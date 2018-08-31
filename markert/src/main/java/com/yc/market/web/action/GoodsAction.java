@@ -92,7 +92,10 @@ public class GoodsAction {
 			List<Goods> goodsByThird = gbiz.selectByType(typeid);
 			model.addAttribute("third", goodsByThird);
 			return "TypeList";	*/
-		return null;
+		String typeid = request.getParameter("typeid");
+		List<Goods> typeGoods = gbiz.selectByType("%_"+typeid);
+		model.addAttribute("typeGoods", typeGoods); 
+		return "TypeList";
 	}
 
 	private String selectByName(Model model, Goods goods) {
@@ -146,7 +149,7 @@ public class GoodsAction {
 		String first = request.getParameter("first");
 		String second = request.getParameter("second");
 		String third = request.getParameter("third");
-		String type = first+"_"+second+"_"+third;
+		String type = first+"/"+second+"/"+third;
 		g.setType(type);
         g.setStoreid(ServletUtils.getParameter(request, java.lang.Integer.class, "storeid"));
         System.out.println("================="+g.getStoreid());

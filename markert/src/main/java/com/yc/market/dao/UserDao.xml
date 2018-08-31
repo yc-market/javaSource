@@ -46,7 +46,7 @@
   	</select>
   	
   	 <select id="selectUserByName" resultMap="userMap">
-  		select * from user where uname=#{uname}
+  		select * from user where uname=#{uname}  
   	</select> 
   	
   	<!-- <select id="selectUserByName" resultType="com.yc.market.bean.User">

@@ -25,11 +25,6 @@ public class TypeAction {
 		String parentid = request.getParameter("parentid");
         System.out.println(parentid);
 		List<Type> nextType = typebiz.selectType2(Integer.valueOf(parentid));
-		//System.out.println("===================================="+nextType);
-		/*String nextTypeName;
-		for(int i= 0;i<nextType.size();i++){
-			nextTypeName = nextType.get(i).getTypename();
-		}*/
 		return nextType;
 		
 	}
@@ -40,15 +35,8 @@ public class TypeAction {
 		int typeid1 = Integer.valueOf(request.getParameter("firstid"));
 		String secondid = request.getParameter("secondid");
 		int typeid2;
-		if(secondid.equals("undefined")){
-			secondid="11";
-		}
 		typeid2 = Integer.valueOf(secondid);
-		//System.out.println("========================="+request.getParameter("secondid"));
 		List<Type> lastType = typebiz.selectType3(typeid1, typeid2);
-		System.out.println("===================================="+lastType);
 		return lastType;
-	}
-	
-	
+	}	
 }

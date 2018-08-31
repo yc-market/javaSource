@@ -7,10 +7,13 @@ public class Detail {
 	private Integer gid;
 	private Integer count;
 	private Integer sizeid;
+	private Integer deliver;
+	
 	
 	private Attribute attribute;  //商品属性（包含规格和价格）
 	private Goods goods;
 	private Order order;
+	
 	public Goods getGoods() {
 		return goods;
 	}
@@ -65,6 +68,12 @@ public class Detail {
 	}
 	public void setOrder(Order order) {
 		this.order = order;
+	}
+	public Integer getDeliver() {
+		return deliver;
+	}
+	public void setDeliver(Integer deliver) {
+		this.deliver = deliver;
 	}
 	
 }

@@ -243,12 +243,12 @@ function addFavorite(gid){
         </div>
         
             
-        
+       <!--  
         <div class="s_brand">
         	<div class="s_brand_img"><img src="images/sbrand.jpg" width="188" height="132" /></div>
             <div class="s_brand_c"><a href="#">进入品牌专区</a></div>
         </div>    
-        
+         -->
         
     </div>
     <div class="content mar_20">
@@ -343,12 +343,9 @@ function addFavorite(gid){
                 </div>
                 <div class="des_con" id="p_attribute">
                 	
-                	<table border="0" align="center" style="width:100%; font-family:'宋体'; margin:10px auto;" cellspacing="0" cellpadding="0">
+                	<table border="0" align="center" style="width:100%;margin:10px auto;" cellspacing="0" cellpadding="0">
                       <tr>
-                        <td>商品名称：${detail.gname }</td>
-                        <td>商品编号：${detail.gid }</td>
-                        <!-- <td>品牌： 迪奥（Dior）</td>
-                        <td>上架时间：2015-09-06 09:19:09 </td> -->
+                        ${detail.des}
                       </tr>
                       
                       
@@ -362,19 +359,12 @@ function addFavorite(gid){
                 <div class="des_t">商品详情</div>
                 
                 <div class="des_con">
-                	<table border="0" align="center" style="width:745px; font-size:14px; font-family:'宋体';" cellspacing="0" cellpadding="0">
-                      <tr>
-                        <td width="265"><img src="upload/rawImages/${i.imgname}" width="206" height="412" /></td>
-                        <td>
-                        	${detail.des}
-                        </td>
-                      </tr>
-                    </table>
-                    <c:forEach items="${image}" var="image">
+                	
+                    <c:forEach items="${image}" var="image" begin="1">
                     <p align="center">
-                    <img src="upload/rawImages/${image.imgname}" width="746" height="425" /><br /><br />
+                    <img src="upload/rawImages/${image.imgname}"/>
                     
-					</p>
+					</p> 
                     </c:forEach>
                 </div>
                 

@@ -28,11 +28,11 @@ public interface GoodsDao extends BaseDao<Goods> {
 	void setSession(SqlSession session) ;
 
 
-	@Insert("insert into goods values (null,#{gname},#{price},#{grade},#{des},#{storeid},#{type},#{count})")
+	@Insert("insert into goods values (null,#{gname},#{price},#{grade},#{des},#{storeid},#{type},default,#{count})")
 	@Options(useGeneratedKeys=true,keyColumn="gid",keyProperty="gid")
 	void insert(Goods good);
 	
-	@Select("select * from goods where gid = #{gid}")
+	//@Select("select * from goods where gid = #{gid}")
 	Goods selectById(Integer gid);
 	
 	@Select("select * from goods")

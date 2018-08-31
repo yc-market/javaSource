@@ -20,7 +20,7 @@ public interface UserDao extends BaseDao<User>{
 	@Select("SELECT * from user where uname= #{uname}")
 	List<User> selectUser(String uname);
 	
-	@Insert("insert into user (uname,upass,email,phone,invitor,invitid,totalgrade,identity) values(#{uname},#{upass},#{email},#{phone},#{invitor},#{invitid},#{totalgrade},#{identity})")
+	@Insert("insert into user (uname,upass,email,phone,invitor,invitid,totalgrade,identity) values(#{uname},md5(#{upass}),#{email},#{phone},#{invitor},#{invitid},#{totalgrade},#{identity})")
 	@Options(useGeneratedKeys=true,keyColumn="uid",keyProperty="uid")
 	void insert(User t);
 	
