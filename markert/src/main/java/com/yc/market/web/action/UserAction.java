@@ -76,9 +76,9 @@ public class UserAction {
     		return "AddStore";
     	}else{  
     		store = sbiz.selectStoreByUid(user.getUid());
-    		//session.setAttribute("store", store);
+    		session.setAttribute("store", store);
     		
-    		model.addAttribute("store", store);
+    		//model.addAttribute("store", store);
     		System.out.println("===================="+store.getStoreid());
     		return "Store";
     	}
